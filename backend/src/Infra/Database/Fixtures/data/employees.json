@@ -1,0 +1,48 @@
+[
+  {
+    "name": "support",
+    "phone": "15973121536",
+    "cpf": "70872786064",
+    "email": "support@teste.com",
+    "employeeType": "support",
+    "acceptedTermsOfUse": false,
+    "acceptedAccreditationTerms": false,
+    "deviceId": null,
+    "latitude": null,
+    "longitude": null,
+    "amountToReceive": 0,
+    "currentBalance": 0,
+    "changePassword": true
+  },
+  {
+    "name": "Gael Pereira",
+    "phone": "15986308932",
+    "cpf": "40067483020",
+    "email": "gael.pereira@teste.com",
+    "employeeType": "representative",
+    "acceptedTermsOfUse": false,
+    "acceptedAccreditationTerms": false,
+    "deviceId": null,
+    "latitude": null,
+    "longitude": null,
+    "amountToReceive": 0,
+    "currentBalance": 0,
+    "changePassword": true
+  },
+
+  {
+    "name": "Ravi Rodrigues",
+    "phone": "15981388122",
+    "cpf": "20072600004",
+    "email": "ravi.rodrigues@teste.com",
+    "employeeType": "representative",
+    "acceptedTermsOfUse": false,
+    "acceptedAccreditationTerms": false,
+    "deviceId": null,
+    "latitude": null,
+    "longitude": null,
+    "amountToReceive": 0,
+    "currentBalance": 0,
+    "changePassword": true
+  }
+]

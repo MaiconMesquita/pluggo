@@ -1,0 +1,192 @@
+[
+  {
+    "name": "Taxa de captura 1",
+    "type": "catchRate",
+    "percentageRate": 3.99,
+    "averagePercentageRate": 0,
+    "fixedValue": 0,
+    "installment": 1,
+    "termInDay": 30,
+    "averageTermInDay": 30
+  },
+  {
+    "name": "Taxa Cartão parcela Juros 1",
+    "type": "cardFee",
+    "percentageRate": 5,
+    "averagePercentageRate": 5,
+    "fixedValue": 0,
+    "installment": 1,
+    "termInDay": 30,
+    "averageTermInDay": 30
+  },
+  {
+    "name": "Taxa Cartão parcela Juros 2",
+    "type": "cardFee",
+    "percentageRate": 10,
+    "averagePercentageRate": 7.5,
+    "fixedValue": 0,
+    "installment": 2,
+    "termInDay": 60,
+    "averageTermInDay": 45
+  },
+  {
+    "name": "Taxa Cartão parcela Juros 3",
+    "type": "cardFee",
+    "percentageRate": 15,
+    "averagePercentageRate": 10,
+    "fixedValue": 0,
+    "installment": 3,
+    "termInDay": 90,
+    "averageTermInDay": 60
+  },
+  {
+    "name": "Taxa Cartão parcela Juros 4",
+    "type": "cardFee",
+    "percentageRate": 20,
+    "averagePercentageRate": 12.5,
+    "fixedValue": 0,
+    "installment": 4,
+    "termInDay": 120,
+    "averageTermInDay": 75
+  },
+  {
+    "name": "Taxa Cartão parcela Juros 5",
+    "type": "cardFee",
+    "percentageRate": 25,
+    "averagePercentageRate": 15,
+    "fixedValue": 0,
+    "installment": 5,
+    "termInDay": 150,
+    "averageTermInDay": 90
+  },
+  {
+    "name": "Taxa Cartão parcela Juros 6",
+    "type": "cardFee",
+    "percentageRate": 30,
+    "averagePercentageRate": 17.5,
+    "fixedValue": 0,
+    "installment": 6,
+    "termInDay": 180,
+    "averageTermInDay": 105
+  },
+
+  {
+    "name": "Taxa antecipação automática 1",
+    "type": "automaticaAdvanceFee",
+    "percentageRate": 3.99,
+    "averagePercentageRate": 3.99,
+    "fixedValue": 0,
+    "installment": 1,
+    "termInDay": 30,
+    "averageTermInDay": 30
+  },
+  {
+    "name": "Taxa antecipação automática 2",
+    "type": "automaticaAdvanceFee",
+    "percentageRate": 7.99,
+    "averagePercentageRate": 5.99,
+    "fixedValue": 0,
+    "installment": 2,
+    "termInDay": 60,
+    "averageTermInDay": 45
+  },
+  {
+    "name": "Taxa antecipação automática 3",
+    "type": "automaticaAdvanceFee",
+    "percentageRate": 11.99,
+    "averagePercentageRate": 7.99,
+    "fixedValue": 0,
+    "installment": 3,
+    "termInDay": 90,
+    "averageTermInDay": 60
+  },
+  {
+    "name": "Taxa antecipação automática 4",
+    "type": "automaticaAdvanceFee",
+    "percentageRate": 15.99,
+    "averagePercentageRate": 9.99,
+    "fixedValue": 0,
+    "installment": 4,
+    "termInDay": 120,
+    "averageTermInDay": 75
+  },
+  {
+    "name": "Taxa antecipação automática 5",
+    "type": "automaticaAdvanceFee",
+    "percentageRate": 19.99,
+    "averagePercentageRate": 11.99,
+    "fixedValue": 0,
+    "installment": 5,
+    "termInDay": 150,
+    "averageTermInDay": 90
+  },
+  {
+    "name": "Taxa antecipação automática 6",
+    "type": "automaticaAdvanceFee",
+    "percentageRate": 23.99,
+    "averagePercentageRate": 13.99,
+    "fixedValue": 0,
+    "installment": 6,
+    "termInDay": 180,
+    "averageTermInDay": 105
+  },
+  {
+    "name": "Taxa antecipação pontual 1",
+    "type": "punctualAdvanceFee",
+    "percentageRate": 7.99,
+    "averagePercentageRate": 0,
+    "installment": 1,
+    "termInDay": 30,
+    "averageTermInDay": 30
+  },
+  {
+    "name": "Taxa antecipação pontual 2",
+    "type": "punctualAdvanceFee",
+    "percentageRate": 15.99,
+    "averagePercentageRate": 0,
+    "fixedValue": 0,
+    "installment": 2,
+    "termInDay": 60,
+    "averageTermInDay": 45
+  },
+  {
+    "name": "Taxa antecipação pontual 3",
+    "type": "punctualAdvanceFee",
+    "percentageRate": 23.99,
+    "averagePercentageRate": 0,
+    "fixedValue": 0,
+    "installment": 3,
+    "termInDay": 90,
+    "averageTermInDay": 60
+  },
+  {
+    "name": "Taxa antecipação pontual 4",
+    "type": "punctualAdvanceFee",
+    "percentageRate": 31.99,
+    "averagePercentageRate": 0,
+    "fixedValue": 0,
+    "installment": 4,
+    "termInDay": 120,
+    "averageTermInDay": 75
+  },
+  {
+    "name": "Taxa antecipação pontual 5",
+    "type": "punctualAdvanceFee",
+    "percentageRate": 39.99,
+    "averagePercentageRate": 0,
+    "fixedValue": 0,
+    "installment": 5,
+    "termInDay": 150,
+    "averageTermInDay": 90
+  },
+  {
+    "name": "Taxa antecipação pontual 6",
+    "type": "punctualAdvanceFee",
+    "percentageRate": 47.99,
+    "averagePercentageRate": 0,
+    "fixedValue": 0,
+    "installment": 6,
+    "termInDay": 180,
+    "averageTermInDay": 105
+  }
+]

@@ -1,0 +1,45 @@
+{
+  "license": "proprietary",
+  "name": "adaga/pluggo-backend",
+  "description": "Projeto backend para gerenciamento da aplicação PlugGo",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/",
+      "Mock\\": "tests/mocks",
+      "Helpers\\": "tests/helpers"
+    }
+  },
+  "authors": [],
+  "require": {
+    "slim/slim": "4.*",
+    "guzzlehttp/psr7": "^2.3",
+    "guzzlehttp/guzzle": "^7.0",
+    "ramsey/uuid": "^4.7",
+    "vlucas/phpdotenv": "^5.4",
+    "slim/php-view": "^3.2",
+    "aws/aws-sdk-php": "^3.231",
+    "phpmailer/phpmailer": "^6.6",
+    "firebase/php-jwt": "^6.3",
+    "bref/bref": "^1.7",
+    "dompdf/dompdf": "^2.0",
+    "rakit/validation": "^1.4",
+    "bref/logger": "^1.0",
+    "doctrine/orm": "^2.16",
+    "symfony/cache": "^6.3",
+    "doctrine/migrations": "^3.7",
+    "beberlei/doctrineextensions": "^1.4",
+    "endroid/qr-code": "^5.1",
+    "bref/extra-php-extensions": "^0.12.4",
+    "azuyalabs/yasumi": "^2.8"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5",
+    "phpunit/phpunit-selenium": "*",
+    "php-webdriver/webdriver": "^1.8.0",
+    "fakerphp/faker": "^1.23"
+  },
+  "scripts": {
+    "test": "./vendor/bin/phpunit --verbose tests"
+  }
+}

@@ -1,0 +1,65 @@
+version: "3"
+
+services:
+  mysql:
+    container_name: brandscard_db
+    image: mysql:5.7
+    volumes:
+      - ./db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    networks:
+      - brandscard-network
+
+  localstack:
+    container_name: localstack_brandscard
+    image: localstack/localstack:3.0.2
+    ports:
+      - "127.0.0.1:4566:4566" # LocalStack Gateway
+      - "127.0.0.1:4510-4559:4510-4559" # external services port range
+    environment:
+      - DEBUG=${DEBUG-}
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - brandscard-network
+
+  php:
+    container_name: brandscard_app
+    build: ./docker
+    environment:
+      docker: "true"
+    ports:
+      - 8000:8080
+    volumes:
+      - .:/var/www
+      - ./logs:/var/www/logs
+    depends_on:
+      - mysql
+      - localstack
+    networks:
+      - brandscard-network
+
+  phpmyadmin:
+    container_name: brandscard_phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8181:80
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    networks:
+      - brandscard-network
+
+networks:
+  brandscard-network:
+    driver: bridge

@@ -1,0 +1,652 @@
+node_modules
+package-lock.json
+package.json
+##### Windows
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+##### Linux
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+##### MacOS
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+##### Backup
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
+
+##### GPG
+secring.*
+
+##### Dropbox
+# Dropbox settings and caches
+.dropbox
+.dropbox.attr
+.dropbox.cache
+
+##### SynopsysVCS
+# Waveform formats
+*.vcd
+*.vpd
+*.evcd
+*.fsdb
+
+# Default name of the simulation executable.  A different name can be
+# specified with this switch (the associated daidir database name is
+# also taken from here):  -o <path>/<filename>
+simv
+
+# Generated for Verilog and VHDL top configs
+simv.daidir/
+simv.db.dir/
+
+# Infrastructure necessary to co-simulate SystemC models with
+# Verilog/VHDL models.  An alternate directory may be specified with this
+# switch:  -Mdir=<directory_path>
+csrc/
+
+# Log file - the following switch allows to specify the file that will be
+# used to write all messages from simulation:  -l <filename>
+*.log
+
+# Coverage results (generated with urg) and database location.  The
+# following switch can also be used:  urg -dir <coverage_directory>.vdb
+simv.vdb/
+urgReport/
+
+# DVE and UCLI related files.
+DVEfiles/
+ucli.key
+
+# When the design is elaborated for DirectC, the following file is created
+# with declarations for C/C++ functions.
+vc_hdrs.h
+
+##### SVN
+.svn/
+
+##### Mercurial
+.hg/
+.hgignore
+.hgsigs
+.hgsub
+.hgsubstate
+.hgtags
+
+##### Bazaar
+.bzr/
+.bzrignore
+
+##### CVS
+/CVS/*
+**/CVS/*
+.cvsignore
+*/.cvsignore
+
+##### TortoiseGit
+# Project-level settings
+/.tgitconfig
+
+##### PuTTY
+# Private key
+*.ppk
+
+##### Vim
+# Swap
+[._]*.s[a-v][a-z]
+!*.svg  # comment out if you don't need vector files
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+Sessionx.vim
+
+# Temporary
+.netrwhist
+*~
+# Auto-generated tag files
+tags
+# Persistent undo
+[._]*.un~
+
+##### Emacs
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# flymake-mode
+*_flymake.*
+
+# eshell files
+/eshell/history
+/eshell/lastdir
+
+# elpa packages
+/elpa/
+
+# reftex files
+*.rel
+
+# AUCTeX auto folder
+/auto/
+
+# cask packages
+.cask/
+dist/
+
+# Flycheck
+flycheck_*.el
+
+# server auth directory
+/server/
+
+# projectiles files
+.projectile
+
+# directory configuration
+.dir-locals.el
+
+# network security
+/network-security.data
+
+##### SublimeText
+# Cache files for Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# Workspace files are user-specific
+*.sublime-workspace
+
+# Project files should be checked into the repository, unless a significant
+# proportion of contributors will probably not be using Sublime Text
+# *.sublime-project
+
+# SFTP configuration file
+sftp-config.json
+sftp-config-alt*.json
+
+# Package control specific files
+Package Control.last-run
+Package Control.ca-list
+Package Control.ca-bundle
+Package Control.system-ca-bundle
+Package Control.cache/
+Package Control.ca-certs/
+Package Control.merged-ca-bundle
+Package Control.user-ca-bundle
+oscrypto-ca-bundle.crt
+bh_unicode_properties.cache
+
+# Sublime-github package stores a github token in this file
+# https://packagecontrol.io/packages/sublime-github
+GitHub.sublime-settings
+
+##### Notepad++
+# Notepad++ backups #
+*.bak
+
+##### TextMate
+*.tmproj
+*.tmproject
+tmtags
+
+##### VisualStudioCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+##### NetBeans
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+##### JetBrains
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+# Generated files
+.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/artifacts
+# .idea/compiler.xml
+# .idea/jarRepositories.xml
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+cmake-build-*/
+
+# Mongo Explorer plugin
+.idea/**/mongoSettings.xml
+
+# File-based project format
+*.iws
+
+# IntelliJ
+out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# env
+.env
+.env.dev
+.env.prod
+
+*.zip
+*cloudformation*
+serverless-state.json
+
+# Cursive Clojure plugin
+.idea/replstate.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+# Editor-based Rest Client
+.idea/httpRequests
+
+# Android studio 3.1+ serialized cache file
+.idea/caches/build_file_checksums.ser
+
+##### Eclipse
+.metadata
+# bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# CDT- autotools
+.autotools
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+# Annotation Processing
+.apt_generated/
+.apt_generated_test/
+
+# Scala IDE specific (Scala & Java development for Eclipse)
+.cache-main
+.scala_dependencies
+.worksheet
+
+# Uncomment this line if you wish to ignore the project description file.
+# Typically, this file would be tracked if it contains build/dependency configurations:
+#.project
+
+##### Dreamweaver
+# DW Dreamweaver added files
+_notes
+_compareTemp
+configs/
+dwsync.xml
+dw_php_codehinting.config
+*.mno
+
+##### CodeKit
+# General CodeKit files to ignore
+config.codekit
+config.codekit3
+/min
+
+##### Gradle
+.gradle
+**/build/
+!src/**/build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
+
+##### Composer
+composer.phar
+/vendor/
+
+# Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
+# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
+composer.lock
+
+##### PHP CodeSniffer
+# gitignore for the PHP Codesniffer framework
+# website: https://github.com/squizlabs/PHP_CodeSniffer
+#
+# Recommended template: PHP.gitignore
+
+/wpcs/*
+
+##### SASS
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+db
+volume/cache/machine.json
+volume/cache/server.test.pem
+volume/cache/server.test.pem.crt
+volume/cache/server.test.pem.key
+volume/cache/service-catalog-2_3_3_dev-1_31_58.pickle
+volume/cache/service-catalog-3_0_2-1_32_5.pickle
+coverage/bootstrap.php.html
+coverage/dashboard.html
+coverage/index.html
+coverage/index.php.html
+coverage/Routes.php.html
+coverage/Application/dashboard.html
+coverage/Application/index.html
+coverage/Application/UseCase/dashboard.html
+coverage/Application/UseCase/index.html
+coverage/Application/UseCase/Signin/dashboard.html
+coverage/Application/UseCase/Signin/index.html
+coverage/Application/UseCase/Signin/Signin.php.html
+coverage/Application/UseCase/Signin/SigninInput.php.html
+coverage/Application/UseCase/Signin/SigninOutput.php.html
+coverage/Application/UseCase/Signup/dashboard.html
+coverage/Application/UseCase/Signup/index.html
+coverage/Application/UseCase/Signup/Signup.php.html
+coverage/Application/UseCase/Signup/SignupInput.php.html
+coverage/Application/UseCase/Signup/SignupOutput.php.html
+coverage/Domain/dashboard.html
+coverage/Domain/index.html
+coverage/Domain/Entity/Address.php.html
+coverage/Domain/Entity/Auth.php.html
+coverage/Domain/Entity/dashboard.html
+coverage/Domain/Entity/Device.php.html
+coverage/Domain/Entity/DeviceUser.php.html
+coverage/Domain/Entity/File.php.html
+coverage/Domain/Entity/HttpRequest.php.html
+coverage/Domain/Entity/index.html
+coverage/Domain/Entity/Profile.php.html
+coverage/Domain/Entity/Token.php.html
+coverage/Domain/Entity/TokenData.php.html
+coverage/Domain/Entity/User.php.html
+coverage/Domain/Entity/Service/dashboard.html
+coverage/Domain/Entity/Service/index.html
+coverage/Domain/Entity/Service/ValidateDocument/AbstractHandler.php.html
+coverage/Domain/Entity/Service/ValidateDocument/CnpjValidate.php.html
+coverage/Domain/Entity/Service/ValidateDocument/CpfValidate.php.html
+coverage/Domain/Entity/Service/ValidateDocument/dashboard.html
+coverage/Domain/Entity/Service/ValidateDocument/index.html
+coverage/Domain/Entity/Service/ValidateDocument/ValidateDocument.php.html
+coverage/Domain/Entity/ValueObject/AnalysisStatus.php.html
+coverage/Domain/Entity/ValueObject/dashboard.html
+coverage/Domain/Entity/ValueObject/Document.php.html
+coverage/Domain/Entity/ValueObject/Email.php.html
+coverage/Domain/Entity/ValueObject/FileType.php.html
+coverage/Domain/Entity/ValueObject/index.html
+coverage/Domain/Entity/ValueObject/Password.php.html
+coverage/Domain/Entity/ValueObject/PhoneNumber.php.html
+coverage/Domain/Entity/ValueObject/Status.php.html
+coverage/Domain/Entity/ValueObject/TokenType.php.html
+coverage/Domain/Entity/ValueObject/UserType.php.html
+coverage/Domain/Enums/dashboard.html
+coverage/Domain/Enums/DocumentTypes.php.html
+coverage/Domain/Enums/index.html
+coverage/Domain/Event/dashboard.html
+coverage/Domain/Event/DomainEvent.php.html
+coverage/Domain/Event/index.html
+coverage/Domain/Exception/dashboard.html
+coverage/Domain/Exception/index.html
+coverage/Domain/Exception/InvalidAuthException.php.html
+coverage/Domain/Exception/InvalidDataException.php.html
+coverage/Domain/Exception/NotFoundException.php.html
+coverage/Domain/RepositoryContract/dashboard.html
+coverage/Domain/RepositoryContract/DeviceRepositoryContract.php.html
+coverage/Domain/RepositoryContract/index.html
+coverage/Domain/RepositoryContract/ProfileRepositoryContract.php.html
+coverage/Domain/RepositoryContract/TokenRepositoryContract.php.html
+coverage/Domain/RepositoryContract/UserRepositoryContract.php.html
+coverage/Infra/dashboard.html
+coverage/Infra/index.html
+coverage/Infra/Controller/Controller.php.html
+coverage/Infra/Controller/dashboard.html
+coverage/Infra/Controller/Handler.php.html
+coverage/Infra/Controller/HttpMethods.php.html
+coverage/Infra/Controller/HttpRequest.php.html
+coverage/Infra/Controller/HttpResponse.php.html
+coverage/Infra/Controller/index.html
+coverage/Infra/Controller/MiddlewareContract.php.html
+coverage/Infra/Controller/Authentication/dashboard.html
+coverage/Infra/Controller/Authentication/index.html
+coverage/Infra/Controller/Authentication/SigninController.php.html
+coverage/Infra/Controller/Authentication/SignupController.php.html
+coverage/Infra/Database/dashboard.html
+coverage/Infra/Database/DB.php.html
+coverage/Infra/Database/Doctrine.php.html
+coverage/Infra/Database/index.html
+coverage/Infra/Database/MySQL.php.html
+coverage/Infra/Database/EntitiesOrm/Address.php.html
+coverage/Infra/Database/EntitiesOrm/BaseOrm.php.html
+coverage/Infra/Database/EntitiesOrm/dashboard.html
+coverage/Infra/Database/EntitiesOrm/Device.php.html
+coverage/Infra/Database/EntitiesOrm/File.php.html
+coverage/Infra/Database/EntitiesOrm/index.html
+coverage/Infra/Database/EntitiesOrm/Profile.php.html
+coverage/Infra/Database/EntitiesOrm/Token.php.html
+coverage/Infra/Database/EntitiesOrm/User.php.html
+coverage/Infra/Factory/dashboard.html
+coverage/Infra/Factory/index.html
+coverage/Infra/Factory/RepositoryFactoryMySQL.php.html
+coverage/Infra/Factory/ServiceFactory.php.html
+coverage/Infra/Factory/SigninFactory.php.html
+coverage/Infra/Factory/SignupFactory.php.html
+coverage/Infra/Factory/ThirdPartyFactory.php.html
+coverage/Infra/Factory/Contract/ControllerFactoryContract.php.html
+coverage/Infra/Factory/Contract/dashboard.html
+coverage/Infra/Factory/Contract/index.html
+coverage/Infra/Factory/Contract/RepositoryFactoryContract.php.html
+coverage/Infra/Factory/Contract/ServiceFactoryContract.php.html
+coverage/Infra/Factory/Contract/ThirdPartyFactoryContract.php.html
+coverage/Infra/Repository/BaseRepository.php.html
+coverage/Infra/Repository/dashboard.html
+coverage/Infra/Repository/DeviceRepository.php.html
+coverage/Infra/Repository/index.html
+coverage/Infra/Repository/ProfileRepository.php.html
+coverage/Infra/Repository/TokenRepositoryRepository.php.html
+coverage/Infra/Repository/UserRepository.php.html
+coverage/Infra/ThirdParty/dashboard.html
+coverage/Infra/ThirdParty/index.html
+coverage/Infra/ThirdParty/Env/dashboard.html
+coverage/Infra/ThirdParty/Env/index.html
+coverage/Infra/ThirdParty/Env/PhpDotEnvAdapter.php.html
+coverage/Infra/ThirdParty/Http/dashboard.html
+coverage/Infra/ThirdParty/Http/Http.php.html
+coverage/Infra/ThirdParty/Http/index.html
+coverage/Infra/ThirdParty/Http/SlimHttpAdapter.php.html
+coverage/Infra/ThirdParty/JWT/dashboard.html
+coverage/Infra/ThirdParty/JWT/index.html
+coverage/Infra/ThirdParty/JWT/JWT.php.html
+coverage/Infra/ThirdParty/JWT/JWTAdapter.php.html
+coverage/Infra/ThirdParty/Logging/BrefLoggingAdapter.php.html
+coverage/Infra/ThirdParty/Logging/dashboard.html
+coverage/Infra/ThirdParty/Logging/index.html
+coverage/Infra/ThirdParty/Logging/Logging.php.html
+coverage/Infra/ThirdParty/Mail/dashboard.html
+coverage/Infra/ThirdParty/Mail/index.html
+coverage/Infra/ThirdParty/Mail/Mail.php.html
+coverage/Infra/ThirdParty/Mail/PHPMailerAdapter.php.html
+coverage/Infra/ThirdParty/Queue/AwsSqsAdapter.php.html
+coverage/Infra/ThirdParty/Queue/dashboard.html
+coverage/Infra/ThirdParty/Queue/index.html
+coverage/Infra/ThirdParty/Queue/Queue.php.html
+coverage/Infra/ThirdParty/Uuid/dashboard.html
+coverage/Infra/ThirdParty/Uuid/index.html
+coverage/Infra/ThirdParty/Uuid/RamseyUuidAdapter.php.html
+coverage/Infra/ThirdParty/Uuid/Uuid.php.html
+coverage/_css/bootstrap.min.css
+coverage/_css/custom.css
+coverage/_css/nv.d3.min.css
+coverage/_css/octicons.css
+coverage/_css/style.css
+coverage/_icons/file-code.svg
+coverage/_icons/file-directory.svg
+coverage/_js/bootstrap.min.js
+coverage/_js/d3.min.js
+coverage/_js/file.js
+coverage/_js/jquery.min.js
+coverage/_js/nv.d3.min.js
+coverage/_js/popper.min.js

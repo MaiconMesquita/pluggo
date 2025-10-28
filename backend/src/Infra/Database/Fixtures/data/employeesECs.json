@@ -1,0 +1,95 @@
+[
+  {
+    "name": "Samuel Alves",
+    "phone": "15979784751",
+    "cpf": null,
+    "email": "samuel.alves@teste.com",
+    "employeeType": "polo",
+    "acceptedTermsOfUse": false,
+    "acceptedAccreditationTerms": false,
+    "deviceId": null,
+    "latitude": null,
+    "longitude": null,
+    "amountToReceive": 0,
+    "currentBalance": 0,
+    "changePassword": true
+  },
+  {
+    "name": "Helena Silva",
+    "phone": "15994984531",
+    "cpf": "57663130049",
+    "email": "helena.silva@teste.com",
+    "employeeType": "establishmentOwner",
+    "acceptedTermsOfUse": true,
+    "acceptedAccreditationTerms": true,
+    "deviceId": "f0d2e1a74e109f89cd741fb7a866ad",
+    "latitude": "16.9752",
+    "longitude": "-21.3913",
+    "amountToReceive": 0,
+    "currentBalance": 0,
+    "changePassword": true
+  },
+  {
+    "name": "Miguel Santos",
+    "phone": "15989205837",
+    "cpf": null,
+    "email": "miguel.santos@teste.com",
+    "employeeType": "establishmentOwner",
+    "acceptedTermsOfUse": true,
+    "acceptedAccreditationTerms": true,
+    "deviceId": "7a689cda8e4345a5323c6b1d78c4e2",
+    "latitude": "-44.2316",
+    "longitude": "-114.8031",
+    "amountToReceive": 0,
+    "currentBalance": 0,
+    "changePassword": true
+  },
+
+  {
+    "name": "Cecilia Oliveira",
+    "phone": "15986858271",
+    "cpf": "78909516046",
+    "email": "cecilia.oliveira@teste.com",
+    "employeeType": "establishmentOwner",
+    "acceptedTermsOfUse": true,
+    "acceptedAccreditationTerms": true,
+    "deviceId": "d9befe1b9358ab2bc546088beb63eb",
+    "latitude": "-9.4525",
+    "longitude": "169.3231",
+    "amountToReceive": 0,
+    "currentBalance": 0,
+    "changePassword": true
+  },
+
+  {
+    "name": "Heitor Silva",
+    "phone": "15981648642",
+    "cpf": null,
+    "email": "heitor.silva@teste.com",
+    "employeeType": "establishmentOwner",
+    "acceptedTermsOfUse": true,
+    "acceptedAccreditationTerms": true,
+    "deviceId": "9a09d9d7549643c57a3fd186d4ee69",
+    "latitude": "20.5164",
+    "longitude": "-117.7649",
+    "amountToReceive": 0,
+    "currentBalance": 0,
+    "changePassword": true
+  },
+
+  {
+    "name": "Maite Souza Fornecedor",
+    "phone": "15988536155",
+    "cpf": null,
+    "email": "maite.souza.fornecedor@teste.com",
+    "employeeType": "supplier",
+    "acceptedTermsOfUse": true,
+    "acceptedAccreditationTerms": true,
+    "deviceId": "400774479dbd3c8cefbecdcde9bd7e",
+    "latitude": "-25.0918",
+    "longitude": "162.6811",
+    "amountToReceive": 0,
+    "currentBalance": 0,
+    "changePassword": true
+  }
+]
