@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "807915091232",
+    "project_id": "pluggo-65ffb",
+    "storage_bucket": "pluggo-65ffb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807915091232:android:4cd1d764f49f80e7541345",
+        "android_client_info": {
+          "package_name": "com.pluggo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807915091232-739mln4ela9d0861locga4rlrmmb70sa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFjruURM877Ef5V5-AhIHY3rCR9FoUcxk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807915091232-739mln4ela9d0861locga4rlrmmb70sa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "807915091232-9b6gsbcbecdmb87lvqcljj1o9drd3nfr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.pluggo.pluggo"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807915091232:android:45323736d1bc0ca8541345",
+        "android_client_info": {
+          "package_name": "com.pluggo.pluggo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807915091232-jf49fpkp510vpim3ka9o79bongeelf5v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pluggo.pluggo",
+            "certificate_hash": "e9c3abda1ad03da632e86c2e2a25ccec54954554"
+          }
+        },
+        {
+          "client_id": "807915091232-739mln4ela9d0861locga4rlrmmb70sa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFjruURM877Ef5V5-AhIHY3rCR9FoUcxk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807915091232-739mln4ela9d0861locga4rlrmmb70sa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "807915091232-9b6gsbcbecdmb87lvqcljj1o9drd3nfr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.pluggo.pluggo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
