@@ -16,6 +16,7 @@ class ChargeSpots
     private string $longitude;
     private Host $host;
     private ?float $pricePerKwh = null;         // preço por kWh
+    /** @var SpotReview[] */
     private array $reviews = [];                 // avaliações dos pontos
     private ?string $connectorType = null;       // tipo de conector
     private string $status = 'available';        // status: 'available' ou 'occupied'
@@ -54,7 +55,12 @@ class ChargeSpots
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'pricePerKwh' => $this->pricePerKwh,
-            'reviews' => $this->reviews,
+            'ratingAverage' => $this->getAverageRating(),
+            'reviewsCount' => count($this->reviews),
+            'reviews' => array_map(
+                fn($review) => $review->toJSON(),
+                $this->reviews
+            ),
             'connectorType' => $this->connectorType,
             'status' => $this->status,
             'deactivationDate' => $this->deactivationDate?->format('Y-m-d H:i:s'),
@@ -84,6 +90,21 @@ class ChargeSpots
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    public function getAverageRating(): ?float
+    {
+        if (empty($this->reviews)) {
+            return null; // ou 0.0 se preferir
+        }
+
+        $sum = array_reduce(
+            $this->reviews,
+            fn($carry, $review) => $carry + $review->getRating(),
+            0
+        );
+
+        return round($sum / count($this->reviews), 1); // 1 casa decimal (ex: 3.5)
     }
 
     public function getLatitude(): string
@@ -126,11 +147,17 @@ class ChargeSpots
         $this->pricePerKwh = $pricePerKwh;
     }
 
+    /**
+     * @return SpotReview[]
+     */
     public function getReviews(): array
     {
         return $this->reviews;
     }
 
+    /**
+     * @param SpotReview[] $reviews
+     */
     public function setReviews(array $reviews): void
     {
         $this->reviews = $reviews;

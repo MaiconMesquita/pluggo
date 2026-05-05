@@ -1,14 +1,15 @@
 {
-  "C:\\Users\\HP\\Documents\\facens\\Facens-Backend\\serverless.yaml": {
-    "versionFramework": "4.23.0",
-    "servicePath": "C:\\Users\\HP\\Documents\\facens\\Facens-Backend\\serverless.yaml",
+  "C:\\Users\\HP\\Documents\\facens\\pluggo\\Facens-Backend\\serverless.yaml": {
+    "versionFramework": "4.35.0",
+    "servicePath": "C:\\Users\\HP\\Documents\\facens\\pluggo\\Facens-Backend\\serverless.yaml",
     "serviceConfigFileName": "serverless.yaml",
     "service": {
       "service": "api-plugGo",
       "provider": {
         "name": "aws",
-        "region": "us-east-1",
+        "region": "sa-east-1",
         "runtime": "provided.al2",
+        "profile": "faculdade",
         "stage": "dev",
         "versionFunctions": true,
         "compiledCloudFormationTemplate": {
@@ -96,29 +97,15 @@
                       "lambdaRole"
                     ]
                   ]
-                },
-                "ManagedPolicyArns": [
-                  {
-                    "Fn::Join": [
-                      "",
-                      [
-                        "arn:",
-                        {
-                          "Ref": "AWS::Partition"
-                        },
-                        ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
-                      ]
-                    ]
-                  }
-                ]
+                }
               }
             },
             "ApiDashbackendLambdaFunction": {
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-us-east-1-7509cb13-970e",
-                  "S3Key": "serverless/api-plugGo/dev/1763431951622-2025-11-18T02:12:31.622Z/api-plugGo.zip"
+                  "S3Bucket": "serverless-framework-deployments-sa-east-1-206ba244-b0bb",
+                  "S3Key": "serverless/api-plugGo/dev/1778021332583-2026-05-05T22:48:52.583Z/api-plugGo.zip"
                 },
                 "Handler": "src/index.php",
                 "Runtime": "provided.al2",
@@ -131,32 +118,23 @@
                     "Arn"
                   ]
                 },
-                "VpcConfig": {
-                  "SecurityGroupIds": [
-                    "sg-0f9e946870959fc9c"
-                  ],
-                  "SubnetIds": [
-                    "subnet-095e969481a1e353f",
-                    "subnet-010fa3a9ac227893e"
-                  ]
-                },
                 "Layers": [
-                  "arn:aws:lambda:us-east-1:209497400698:layer:php-81-fpm:64",
-                  "arn:aws:lambda:us-east-1:403367587399:layer:gd-php-81:8"
+                  "arn:aws:lambda:sa-east-1:209497400698:layer:php-81-fpm:64",
+                  "arn:aws:lambda:sa-east-1:403367587399:layer:gd-php-81:8"
                 ]
               },
               "DependsOn": [
                 "ApiDashbackendLogGroup"
               ]
             },
-            "ApiDashbackendLambdaVersionfCsJwOuVg7DIrMGTcpuFznJNVSroznS4bWDVZw6Ixs": {
+            "ApiDashbackendLambdaVersionQjKQ34XOSPK0EubDDPlVBBph58geYHUVYFofN0es4": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "ApiDashbackendLambdaFunction"
                 },
-                "CodeSha256": "5bGHUIGh5mTCDC+Ak/gbGIaR0BfBQ3bh3WeJ+O8b4VM="
+                "CodeSha256": "kZto7RDnVV9+GOn3zfEX5KsGGdh7GkYKsadhntOR1W4="
               }
             },
             "HttpApi": {
@@ -257,7 +235,7 @@
           },
           "Outputs": {
             "ServerlessDeploymentBucketName": {
-              "Value": "serverless-framework-deployments-us-east-1-7509cb13-970e",
+              "Value": "serverless-framework-deployments-sa-east-1-206ba244-b0bb",
               "Export": {
                 "Name": "sls-api-plugGo-dev-ServerlessDeploymentBucketName"
               }
@@ -265,7 +243,7 @@
             "ApiDashbackendLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "ApiDashbackendLambdaVersionfCsJwOuVg7DIrMGTcpuFznJNVSroznS4bWDVZw6Ixs"
+                "Ref": "ApiDashbackendLambdaVersionQjKQ34XOSPK0EubDDPlVBBph58geYHUVYFofN0es4"
               },
               "Export": {
                 "Name": "sls-api-plugGo-dev-ApiDashbackendLambdaFunctionQualifiedArn"
@@ -317,21 +295,12 @@
       "functions": {
         "api-backend": {
           "handler": "src/index.php",
-          "vpc": {
-            "securityGroupIds": [
-              "sg-0f9e946870959fc9c"
-            ],
-            "subnetIds": [
-              "subnet-095e969481a1e353f",
-              "subnet-010fa3a9ac227893e"
-            ]
-          },
           "description": "",
           "timeout": 28,
           "memorySize": 128,
           "layers": [
-            "arn:aws:lambda:us-east-1:209497400698:layer:php-81-fpm:64",
-            "arn:aws:lambda:us-east-1:403367587399:layer:gd-php-81:8"
+            "arn:aws:lambda:sa-east-1:209497400698:layer:php-81-fpm:64",
+            "arn:aws:lambda:sa-east-1:403367587399:layer:gd-php-81:8"
           ],
           "events": [
             {
@@ -343,7 +312,8 @@
           "package": {},
           "memory": 128,
           "runtime": "provided.al2",
-          "versionLogicalId": "ApiDashbackendLambdaVersionfCsJwOuVg7DIrMGTcpuFznJNVSroznS4bWDVZw6Ixs"
+          "vpc": {},
+          "versionLogicalId": "ApiDashbackendLambdaVersionQjKQ34XOSPK0EubDDPlVBBph58geYHUVYFofN0es4"
         }
       },
       "package": {
@@ -366,15 +336,16 @@
           "db/*",
           "volume/*"
         ],
-        "deploymentBucket": "serverless-framework-deployments-us-east-1-7509cb13-970e",
-        "artifact": "C:\\Users\\HP\\Documents\\facens\\Facens-Backend\\.serverless\\api-plugGo.zip",
-        "artifactDirectoryName": "serverless/api-plugGo/dev/1763431951622-2025-11-18T02:12:31.622Z"
+        "deploymentBucket": "serverless-framework-deployments-sa-east-1-206ba244-b0bb",
+        "artifact": "C:\\Users\\HP\\Documents\\facens\\pluggo\\Facens-Backend\\.serverless\\api-plugGo.zip",
+        "artifactDirectoryName": "serverless/api-plugGo/dev/1778021332583-2026-05-05T22:48:52.583Z"
       }
     },
     "provider": {
       "name": "aws",
-      "region": "us-east-1",
+      "region": "sa-east-1",
       "runtime": "provided.al2",
+      "profile": "faculdade",
       "stage": "dev",
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
@@ -462,29 +433,15 @@
                     "lambdaRole"
                   ]
                 ]
-              },
-              "ManagedPolicyArns": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
-                    ]
-                  ]
-                }
-              ]
+              }
             }
           },
           "ApiDashbackendLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
-                "S3Bucket": "serverless-framework-deployments-us-east-1-7509cb13-970e",
-                "S3Key": "serverless/api-plugGo/dev/1763431951622-2025-11-18T02:12:31.622Z/api-plugGo.zip"
+                "S3Bucket": "serverless-framework-deployments-sa-east-1-206ba244-b0bb",
+                "S3Key": "serverless/api-plugGo/dev/1778021332583-2026-05-05T22:48:52.583Z/api-plugGo.zip"
               },
               "Handler": "src/index.php",
               "Runtime": "provided.al2",
@@ -497,32 +454,23 @@
                   "Arn"
                 ]
               },
-              "VpcConfig": {
-                "SecurityGroupIds": [
-                  "sg-0f9e946870959fc9c"
-                ],
-                "SubnetIds": [
-                  "subnet-095e969481a1e353f",
-                  "subnet-010fa3a9ac227893e"
-                ]
-              },
               "Layers": [
-                "arn:aws:lambda:us-east-1:209497400698:layer:php-81-fpm:64",
-                "arn:aws:lambda:us-east-1:403367587399:layer:gd-php-81:8"
+                "arn:aws:lambda:sa-east-1:209497400698:layer:php-81-fpm:64",
+                "arn:aws:lambda:sa-east-1:403367587399:layer:gd-php-81:8"
               ]
             },
             "DependsOn": [
               "ApiDashbackendLogGroup"
             ]
           },
-          "ApiDashbackendLambdaVersionfCsJwOuVg7DIrMGTcpuFznJNVSroznS4bWDVZw6Ixs": {
+          "ApiDashbackendLambdaVersionQjKQ34XOSPK0EubDDPlVBBph58geYHUVYFofN0es4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiDashbackendLambdaFunction"
               },
-              "CodeSha256": "5bGHUIGh5mTCDC+Ak/gbGIaR0BfBQ3bh3WeJ+O8b4VM="
+              "CodeSha256": "kZto7RDnVV9+GOn3zfEX5KsGGdh7GkYKsadhntOR1W4="
             }
           },
           "HttpApi": {
@@ -623,7 +571,7 @@
         },
         "Outputs": {
           "ServerlessDeploymentBucketName": {
-            "Value": "serverless-framework-deployments-us-east-1-7509cb13-970e",
+            "Value": "serverless-framework-deployments-sa-east-1-206ba244-b0bb",
             "Export": {
               "Name": "sls-api-plugGo-dev-ServerlessDeploymentBucketName"
             }
@@ -631,7 +579,7 @@
           "ApiDashbackendLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiDashbackendLambdaVersionfCsJwOuVg7DIrMGTcpuFznJNVSroznS4bWDVZw6Ixs"
+              "Ref": "ApiDashbackendLambdaVersionQjKQ34XOSPK0EubDDPlVBBph58geYHUVYFofN0es4"
             },
             "Export": {
               "Name": "sls-api-plugGo-dev-ApiDashbackendLambdaFunctionQualifiedArn"
@@ -684,44 +632,41 @@
       "serviceProvider": null,
       "instanceParameters": null
     },
-    "serviceRawFile": "service: api-plugGo\r\n\r\nprovider:\r\n  name: aws\r\n  region: us-east-1\r\n  runtime: provided.al2\r\n\r\nplugins:\r\n  - ./vendor/bref/bref\r\n  - serverless-ignore\r\n  - ./vendor/bref/extra-php-extensions        \r\n\r\nfunctions:\r\n  api-backend:\r\n    handler: src/index.php\r\n    vpc:\r\n      securityGroupIds:\r\n        - sg-0f9e946870959fc9c\r\n      subnetIds:\r\n        - subnet-095e969481a1e353f\r\n        - subnet-010fa3a9ac227893e\r\n    description: \"\"\r\n    timeout: 28\r\n    memorySize: 128\r\n    layers:\r\n      - ${bref:layer.php-81-fpm}\r\n      - ${bref-extra:gd-php-81}\r\n    events:\r\n      - httpApi: \"*\"\r\npackage:\r\n  patterns:\r\n    - \"!node_modules/**\"\r\n    - \"!test/**\"\r\n",
+    "serviceRawFile": "service: api-plugGo\r\n\r\nprovider:\r\n  name: aws\r\n  region: sa-east-1\r\n  runtime: provided.al2\r\n  profile: faculdade\r\n\r\nplugins:\r\n  - ./vendor/bref/bref\r\n  - serverless-ignore\r\n  - ./vendor/bref/extra-php-extensions        \r\n\r\nfunctions:\r\n  api-backend:\r\n    handler: src/index.php\r\n    description: \"\"\r\n    timeout: 28\r\n    memorySize: 128\r\n    layers:\r\n      - ${bref:layer.php-81-fpm}\r\n      - ${bref-extra:gd-php-81}\r\n    events:\r\n      - httpApi: \"*\"\r\npackage:\r\n  patterns:\r\n    - \"!node_modules/**\"\r\n    - \"!test/**\"\r\n",
     "command": [
       "deploy"
     ],
-    "options": {
-      "aws-profile": "pluggo",
-      "stage": "dev"
-    },
+    "options": {},
     "orgId": "1818ccc4-0ccf-4081-9dd6-7c541db62541",
     "orgName": "leandrosoares",
     "userId": null,
-    "serviceProviderAwsAccountId": "439500390169",
+    "serviceProviderAwsAccountId": "809918851991",
     "serviceProviderAwsCfStackName": "api-plugGo-dev",
-    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:439500390169:stack/api-plugGo-dev/a9c2b3b0-aef7-11f0-8704-0afff41c8135",
-    "serviceProviderAwsCfStackCreated": "2025-10-22T03:31:57.805Z",
-    "serviceProviderAwsCfStackUpdated": "2025-11-18T02:08:55.141Z",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:sa-east-1:809918851991:stack/api-plugGo-dev/de2e2cc0-3eca-11f1-b82c-06e048801ed5",
+    "serviceProviderAwsCfStackCreated": "2026-04-23T04:14:06.168Z",
+    "serviceProviderAwsCfStackUpdated": "2026-05-05T22:39:30.535Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "ApiDashbackendLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:439500390169:function:api-plugGo-dev-api-backend:63",
+        "OutputValue": "arn:aws:lambda:sa-east-1:809918851991:function:api-plugGo-dev-api-backend:31",
         "Description": "Current Lambda function version",
         "ExportName": "sls-api-plugGo-dev-ApiDashbackendLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "HttpApiId",
-        "OutputValue": "r4xonydxua",
+        "OutputValue": "yq2h3ha4i9",
         "Description": "Id of the HTTP API",
         "ExportName": "sls-api-plugGo-dev-HttpApiId"
       },
       {
         "OutputKey": "ServerlessDeploymentBucketName",
-        "OutputValue": "serverless-framework-deployments-us-east-1-7509cb13-970e",
+        "OutputValue": "serverless-framework-deployments-sa-east-1-206ba244-b0bb",
         "ExportName": "sls-api-plugGo-dev-ServerlessDeploymentBucketName"
       },
       {
         "OutputKey": "HttpApiUrl",
-        "OutputValue": "https://r4xonydxua.execute-api.us-east-1.amazonaws.com",
+        "OutputValue": "https://yq2h3ha4i9.execute-api.sa-east-1.amazonaws.com",
         "Description": "URL of the HTTP API",
         "ExportName": "sls-api-plugGo-dev-HttpApiUrl"
       }
@@ -811,29 +756,15 @@
                   "lambdaRole"
                 ]
               ]
-            },
-            "ManagedPolicyArns": [
-              {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
-                  ]
-                ]
-              }
-            ]
+            }
           }
         },
         "ApiDashbackendLambdaFunction": {
           "Type": "AWS::Lambda::Function",
           "Properties": {
             "Code": {
-              "S3Bucket": "serverless-framework-deployments-us-east-1-7509cb13-970e",
-              "S3Key": "serverless/api-plugGo/dev/1763431951622-2025-11-18T02:12:31.622Z/api-plugGo.zip"
+              "S3Bucket": "serverless-framework-deployments-sa-east-1-206ba244-b0bb",
+              "S3Key": "serverless/api-plugGo/dev/1778021332583-2026-05-05T22:48:52.583Z/api-plugGo.zip"
             },
             "Handler": "src/index.php",
             "Runtime": "provided.al2",
@@ -846,32 +777,23 @@
                 "Arn"
               ]
             },
-            "VpcConfig": {
-              "SecurityGroupIds": [
-                "sg-0f9e946870959fc9c"
-              ],
-              "SubnetIds": [
-                "subnet-095e969481a1e353f",
-                "subnet-010fa3a9ac227893e"
-              ]
-            },
             "Layers": [
-              "arn:aws:lambda:us-east-1:209497400698:layer:php-81-fpm:64",
-              "arn:aws:lambda:us-east-1:403367587399:layer:gd-php-81:8"
+              "arn:aws:lambda:sa-east-1:209497400698:layer:php-81-fpm:64",
+              "arn:aws:lambda:sa-east-1:403367587399:layer:gd-php-81:8"
             ]
           },
           "DependsOn": [
             "ApiDashbackendLogGroup"
           ]
         },
-        "ApiDashbackendLambdaVersionfCsJwOuVg7DIrMGTcpuFznJNVSroznS4bWDVZw6Ixs": {
+        "ApiDashbackendLambdaVersionQjKQ34XOSPK0EubDDPlVBBph58geYHUVYFofN0es4": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "ApiDashbackendLambdaFunction"
             },
-            "CodeSha256": "5bGHUIGh5mTCDC+Ak/gbGIaR0BfBQ3bh3WeJ+O8b4VM="
+            "CodeSha256": "kZto7RDnVV9+GOn3zfEX5KsGGdh7GkYKsadhntOR1W4="
           }
         },
         "HttpApi": {
@@ -972,7 +894,7 @@
       },
       "Outputs": {
         "ServerlessDeploymentBucketName": {
-          "Value": "serverless-framework-deployments-us-east-1-7509cb13-970e",
+          "Value": "serverless-framework-deployments-sa-east-1-206ba244-b0bb",
           "Export": {
             "Name": "sls-api-plugGo-dev-ServerlessDeploymentBucketName"
           }
@@ -980,7 +902,7 @@
         "ApiDashbackendLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "ApiDashbackendLambdaVersionfCsJwOuVg7DIrMGTcpuFznJNVSroznS4bWDVZw6Ixs"
+            "Ref": "ApiDashbackendLambdaVersionQjKQ34XOSPK0EubDDPlVBBph58geYHUVYFofN0es4"
           },
           "Export": {
             "Name": "sls-api-plugGo-dev-ApiDashbackendLambdaFunctionQualifiedArn"

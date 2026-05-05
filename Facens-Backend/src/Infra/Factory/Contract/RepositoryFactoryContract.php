@@ -7,7 +7,9 @@ use App\Domain\RepositoryContract\{
     HostRepositoryContract,
     ApiKeyRepositoryContract,
     TokenRepositoryContract,
-    ChargeSpotsRepositoryContract
+    ChargeSpotsRepositoryContract,
+    EmployeeRepositoryContract,
+    SpotReviewRepositoryContract
 };
 use PhpParser\Node\Expr\FuncCall;
 
@@ -18,4 +20,6 @@ interface RepositoryFactoryContract
     public function getApiKeyRepository(): ApiKeyRepositoryContract;
     public function getTokenRepository(): TokenRepositoryContract;
     public function getChargeSpotsRepository(): ChargeSpotsRepositoryContract;
+    public function getEmployeeRepository(): EmployeeRepositoryContract;
+    public function getReviewSpotRepository(): SpotReviewRepositoryContract;
 }

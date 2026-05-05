@@ -29,8 +29,9 @@ class TokenRepository extends BaseRepository implements TokenRepositoryContract
 
         if (!empty($token->getDriverId())) $tokenOrm->driverId = $token->getDriverId();
         if (!empty($token->getHostId())) $tokenOrm->hostId = $token->getHostId();
+        if (!empty($token->getEmployeeId())) $tokenOrm->hostId = $token->getEmployeeId();
 
-        $tokenOrm->type = $token->getTokenType()->getType();        
+        $tokenOrm->type = $token->getTokenType()->getType();
 
         return $this->persist($tokenOrm)->toDomain();
     }
@@ -58,11 +59,17 @@ class TokenRepository extends BaseRepository implements TokenRepositoryContract
     }
 
 
-    public function revokeTokenByUserId(int $id, bool $realUser): void
+    public function revokeTokenByUserId(int $id, string $authType): void
     {
-        // Busca todos os tokens associados ao userId
-        $tokens = $this->repository->findBy([$realUser ? 'driverId' : 'hostId' => $id]);
-        
+        $field = match ($authType) {
+            'driver' => 'driverId',
+            'host' => 'hostId',
+            'employee' => 'employeeId',
+            default => throw new \InvalidArgumentException("Invalid authType")
+        };
+
+        $tokens = $this->repository->findBy([$field => $id]);
+
         // Verifica se algum token foi encontrado
         if ($tokens) {
             foreach ($tokens as $token) {

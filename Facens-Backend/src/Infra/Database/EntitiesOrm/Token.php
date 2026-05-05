@@ -25,6 +25,9 @@ class Token extends BaseOrm
     #[ORM\Column(name: 'host_id', type: Types::INTEGER, nullable: true)]
     public int $hostId;
 
+    #[ORM\Column(name: 'employee_id', type: Types::INTEGER, nullable: true)]
+    public int $employeeId;
+
     #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $code;
 

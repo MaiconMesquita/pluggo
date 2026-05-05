@@ -2,8 +2,9 @@ service: api-plugGo
 
 provider:
   name: aws
-  region: us-east-1
+  region: sa-east-1
   runtime: provided.al2
+  profile: faculdade
 
 plugins:
   - ./vendor/bref/bref
@@ -13,12 +14,6 @@ plugins:
 functions:
   api-backend:
     handler: src/index.php
-    vpc:
-      securityGroupIds:
-        - sg-0f9e946870959fc9c
-      subnetIds:
-        - subnet-095e969481a1e353f
-        - subnet-010fa3a9ac227893e
     description: ""
     timeout: 28
     memorySize: 128

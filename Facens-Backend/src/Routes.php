@@ -73,14 +73,31 @@ $flexibleAuth = new FlexibleAuth(
 
 $app->group(
     '/driver',
-    function (SlimHttpAdapter $app) use ($apiKeyAuthMiddleware, $bearerAuthForEmployee, $flexibleAuth) {
+    function (SlimHttpAdapter $app) use ($apiKeyAuthMiddleware, $bearerAuthForAll, $flexibleAuth) {
         $app->on(
             HttpMethods::POST,
             '',
             new App\Infra\Factory\CreateAnEmployeeFactory,
             [$flexibleAuth]
         );
-       
+        $app->on(
+            HttpMethods::POST,
+            '/create-review',
+            new App\Infra\Factory\CreateChargeSpotFactory,
+            [$bearerAuthForAll]
+        );
+        $app->on(
+            HttpMethods::DELETE,
+            '/delete-review',
+            new App\Infra\Factory\CreateChargeSpotFactory,
+            [$bearerAuthForAll]
+        );
+        $app->on(
+            HttpMethods::PUT,
+            '/update-review',
+            new App\Infra\Factory\CreateChargeSpotFactory,
+            [$bearerAuthForAll]
+        );
     }
 );
 
@@ -88,7 +105,7 @@ $app->group(
 $app->group(
     '/sms',
     function (SlimHttpAdapter $app) use ($bearerAuthForUser, $bearerAuthForEmployee, $bearerAuthForBoth, $bearerAuthForAll, $bearerAuthForEcAndEm) {
-       
+
         $app->on(
             HttpMethods::POST,
             '/reset/password',
@@ -99,14 +116,14 @@ $app->group(
             '/reset/password-general',
             new App\Infra\Factory\ResetPasswordForAccountGeneralFactory,
         );
-        
+
         $app->on(
             HttpMethods::PUT,
             '/new/password',
             new App\Infra\Factory\SendNewPasswordFactory,
             [$bearerAuthForEmployee]
         );
-       
+
         $app->on(
             HttpMethods::POST,
             '/code/confirm',
@@ -117,64 +134,31 @@ $app->group(
             '/code/confirm-general',
             new App\Infra\Factory\AcceptAndVerifyCodeGeneralFactory,
         );
-       
+
         $app->on(
             HttpMethods::POST,
             '/first-password',
             new App\Infra\Factory\SendFirstPasswordFactory,
         );
-        
+
         $app->on(
             HttpMethods::POST,
             '',
             new App\Infra\Factory\SendSmsFactory,
             [$bearerAuthForEmployee]
         );
-       
     }
 );
 
 $app->group(
-    '/establishment',
+    '/employee',
     function (SlimHttpAdapter $app) use ($bearerAuthForEmployee, $bearerAuthForEcAndEm, $bearerAuthForAll) {
-        $app->on(
-            HttpMethods::PUT,
-            '/withdrawals/approve/{id}',
-            new App\Infra\Factory\ApproveWithdrawalPaymentFactory,
-            [$bearerAuthForEmployee]
-        );
-        $app->on(
-            HttpMethods::PUT,
-            '/approve/{id}',
-            new App\Infra\Factory\ApproveEstablishmentFactory,
-            [$bearerAuthForEmployee]
-        );
-        $app->on(
-            HttpMethods::PUT,
-            '/split',
-            new App\Infra\Factory\UpdateTransactionSplitFactory,
-            [$bearerAuthForEmployee]
-        );
-        $app->on(
-            HttpMethods::PUT,
-            '/split-update',
-            new App\Infra\Factory\UpdateSplitFactory,
-            [$bearerAuthForEcAndEm]
-        );
-     
-        $app->on(
-            HttpMethods::POST,
-            '',
-            new App\Infra\Factory\CreateEstablishmentFactory,
-            [$bearerAuthForEmployee]
-        );
         $app->on(
             HttpMethods::POST,
             '/create',
-            new App\Infra\Factory\CreateAnEstablishmentFactory,
-            [$bearerAuthForEmployee]
+            new App\Infra\Factory\CreateAnEmployeeFactory,
+            []
         );
-     
     }
 );
 
@@ -217,12 +201,18 @@ $app->on(
 
 $app->group(
     '/host',
-    function (SlimHttpAdapter $app) use ($bearerAuthForHost){
-    
+    function (SlimHttpAdapter $app) use ($bearerAuthForHost) {
+
         $app->on(
             HttpMethods::POST,
             '/create-charge-spot',
             new App\Infra\Factory\CreateChargeSpotFactory,
+            [$bearerAuthForHost]
+        );
+        $app->on(
+            HttpMethods::PUT,
+            '/update-spots',
+            new App\Infra\Factory\RevokeSessionFactory,
             [$bearerAuthForHost]
         );
         $app->on(
@@ -240,11 +230,67 @@ $app->group(
     }
 );
 
+$app->group(
+    '/support',
+    function (SlimHttpAdapter $app) use ($bearerAuthForEmployee, $bearerAuthForAll) {
+
+        $app->on(
+            HttpMethods::GET,
+            '/list-users',
+            new App\Infra\Factory\CreateChargeSpotFactory,
+            [$bearerAuthForAll]
+        );
+        $app->on(
+            HttpMethods::POST,
+            '/create-user',
+            new App\Infra\Factory\CreateChargeSpotFactory,
+            [$bearerAuthForAll]
+        );
+        $app->on(
+            HttpMethods::PUT,
+            '/update-user',
+            new App\Infra\Factory\CreateChargeSpotFactory,
+            [$bearerAuthForAll]
+        );
+        $app->on(
+            HttpMethods::DELETE,
+            '/delete-user',
+            new App\Infra\Factory\RevokeSessionFactory,
+            [$bearerAuthForAll]
+        );
+        $app->on(
+            HttpMethods::DELETE,
+            '/delete-spots',
+            new App\Infra\Factory\RevokeSessionFactory,
+            [$bearerAuthForAll]
+        );
+        $app->on(
+            HttpMethods::PUT,
+            '/update-review',
+            new App\Infra\Factory\UpdateReviewFactory,
+            []
+        );
+        $app->on(
+            HttpMethods::PUT,
+            '/update-spots',
+            new App\Infra\Factory\UpdateChargeSpotFactory,
+            []
+        );
+
+        $app->on(
+            HttpMethods::POST,
+            '/create-spots',
+            new App\Infra\Factory\RevokeSessionFactory,
+            [$bearerAuthForAll]
+        );
+    }
+);
+
 
 $app->group(
     '/signup',
     function (SlimHttpAdapter $app) {
-    
+
         $app->on(
             HttpMethods::POST,
             '',

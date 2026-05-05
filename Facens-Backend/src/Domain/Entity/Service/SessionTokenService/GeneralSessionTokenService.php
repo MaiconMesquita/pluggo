@@ -55,8 +55,7 @@ class GeneralSessionTokenService
 
         // 4. Revogar tokens antigos
         try {
-            $isUser = $entityType === 'user';
-            $this->tokenRepository->revokeTokenByUserId(id: $entityId, realUser: $isUser);
+            $this->tokenRepository->revokeTokenByUserId(id: $entityId, authType: $entityType);
         } catch (InternalException) {
             throw new InternalException("Error revoking previous tokens.");
         }

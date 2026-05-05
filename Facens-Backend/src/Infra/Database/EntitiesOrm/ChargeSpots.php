@@ -4,6 +4,8 @@ namespace App\Infra\Database\EntitiesOrm;
 
 use App\Domain\Entity\ChargeSpots as EntityChargeSpots;
 use App\Domain\Entity\Service\DateTimeOffset\DateTimeOffset;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
@@ -32,8 +34,13 @@ class ChargeSpots extends BaseOrm
     #[ORM\Column(name: "price_per_kwh", type: Types::FLOAT, nullable: true)]
     public ?float $pricePerKwh = null;
 
-    #[ORM\Column(name: "reviews", type: Types::JSON, nullable: true)]
-    public ?array $reviews = [];
+    // ✅ RELACIONAMENTO COM REVIEWS
+    #[ORM\OneToMany(
+        mappedBy: 'spot',
+        targetEntity: SpotReview::class,
+        cascade: ['persist', 'remove']
+    )]
+    public Collection $reviews;
 
     #[ORM\Column(name: "connector_type", type: Types::STRING, nullable: true)]
     public ?string $connectorType = null;
@@ -54,6 +61,11 @@ class ChargeSpots extends BaseOrm
     #[ORM\Column(name: "updated_at", type: Types::DATETIME_MUTABLE, nullable: true)]
     public ?DateTime $updatedAt = null;
 
+    // ✅ CONSTRUCTOR (IMPORTANTE)
+    public function __construct()
+    {
+        $this->reviews = new ArrayCollection();
+    }
 
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
@@ -62,11 +74,13 @@ class ChargeSpots extends BaseOrm
         $adjustedDate = DateTimeOffset::getAdjustedDateTime();
 
         $this->updatedAt = $adjustedDate;
-        if (!isset($this->createdAt))
+
+        if (!isset($this->createdAt)) {
             $this->createdAt = $adjustedDate;
+        }
     }
 
-    /** @param EntityBrandedCard $domain */
+    /** @param EntityChargeSpots $domain */
     public static function fromDomain($domain)
     {
         /** @var self $entity */
@@ -76,22 +90,35 @@ class ChargeSpots extends BaseOrm
     }
 
     public function toDomain(): EntityChargeSpots
-{
-    /** @var EntityChargeSpots $base */
-    $base = parent::toDomain();
+    {
+        /** @var EntityChargeSpots $base */
+        $base = parent::toDomain();
 
-    $base->setPricePerKwh($this->pricePerKwh);
-    $base->setConnectorType($this->connectorType);
-    $base->setReviews($this->reviews ?? []);
-    $base->setHost($this->host->toDomain());
-    $base->setLatitude($this->latitude);
-    $base->setLongitude($this->longitude);
-    $base->setStatus($this->status);
-    $base->setDeactivationDate($this->deactivationDate);
-    $base->setCreatedAt($this->createdAt);
-    $base->setUpdatedAt($this->updatedAt);
+        $base->setPricePerKwh($this->pricePerKwh);
+        $base->setConnectorType($this->connectorType);
 
-    return $base;
-}
+        // ✅ CONVERSÃO CORRETA DAS REVIEWS (ORM → DOMAIN)
+        $reviews = [];
+        if ($this->reviews) {
+            foreach ($this->reviews as $review) {
+                $domainReview = $review->toDomain();
 
+                // 🔥 injeta o MESMO objeto (evita loop)
+                $domainReview->setSpot($base);
+
+                $reviews[] = $domainReview;
+            }
+        }
+        $base->setReviews($reviews);
+
+        $base->setHost($this->host->toDomain());
+        $base->setLatitude($this->latitude);
+        $base->setLongitude($this->longitude);
+        $base->setStatus($this->status);
+        $base->setDeactivationDate($this->deactivationDate);
+        $base->setCreatedAt($this->createdAt);
+        $base->setUpdatedAt($this->updatedAt);
+
+        return $base;
+    }
 }

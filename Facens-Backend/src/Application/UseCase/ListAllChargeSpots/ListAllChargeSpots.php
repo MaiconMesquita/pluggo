@@ -24,7 +24,7 @@ class ListAllChargeSpots
     public function execute(ListAllChargeSpotsInput $input)
     {
 
-        $spots = $this->chargeSpotsRepository->testFetchAll();
+        $spots = $this->chargeSpotsRepository->list();
 
         return $spots;
     }

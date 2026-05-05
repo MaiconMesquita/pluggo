@@ -16,7 +16,7 @@ interface TokenRepositoryContract
 
     public function revokeTokenByUserId(
         int $userId,
-        bool $realUser
+        string $authType
     ): void;
 
 }

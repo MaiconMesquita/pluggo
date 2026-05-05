@@ -64,6 +64,7 @@ class ChargeSpotsRepository extends BaseRepository implements ChargeSpotsReposit
         /** @var ChargeSpotsORM $spotOrm */
         $spotOrm = parent::getEntityById($spot->getId());
 
+        $spotOrm->name = $spot->getName();
         $spotOrm->latitude = $spot->getLatitude();
         $spotOrm->longitude = $spot->getLongitude();
         $spotOrm->pricePerKwh = $spot->getPricePerKwh();
@@ -112,6 +113,8 @@ class ChargeSpotsRepository extends BaseRepository implements ChargeSpotsReposit
     {
         $entities = $this->repository
             ->createQueryBuilder('spot')
+            ->leftJoin('spot.reviews', 'reviews')
+            ->addSelect('reviews')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->orderBy('spot.createdAt', 'DESC')
@@ -150,8 +153,7 @@ class ChargeSpotsRepository extends BaseRepository implements ChargeSpotsReposit
 
     private function loadRelationships(ChargeSpotsORM $entity): void
     {
-        // Exemplo: inicializar collection se existir
-        if (isset($entity->reviews) && $entity->reviews instanceof PersistentCollection) {
+        if ($entity->reviews instanceof PersistentCollection) {
             $entity->reviews->initialize();
         }
     }

@@ -7,6 +7,7 @@ use App\Domain\Entity\Service\DateTimeOffset\DateTimeOffset;
 use App\Domain\Entity\ValueObject\{EmployeeType, EntityType, TokenType, UserType};
 use App\Domain\Exception\{AccountLockedByTooManyAttemptsException, BlockingByScoreException, InternalException, InvalidAuthException, InvalidDataException, NotAcceptableException};
 use App\Domain\RepositoryContract\DriverRepositoryContract;
+use App\Domain\RepositoryContract\EmployeeRepositoryContract;
 use App\Domain\RepositoryContract\HostRepositoryContract;
 use App\Infra\Factory\Contract\{RepositoryFactoryContract, ThirdPartyFactoryContract};
 use App\Infra\Repository\{LoginHistoryRepository, TokenRepository};
@@ -19,6 +20,7 @@ class SessionTokenService
     private TokenRepository $tokenRepository;
     private DriverRepositoryContract         $driverRepository;
     private HostRepositoryContract         $hostRepository;
+    private EmployeeRepositoryContract         $employeeRepository;
     private JWT $jwt;
     private Logging $logging;
 
@@ -29,7 +31,8 @@ class SessionTokenService
         $this->tokenRepository = $repositoryFactory->getTokenRepository();
         $this->logging = $thirdPartyFactory->getLogging();
         $this->driverRepository         = $repositoryFactory->getDriverRepository();
-        $this->hostRepository         = $repositoryFactory->getHostRepository();   
+        $this->employeeRepository         = $repositoryFactory->getEmployeeRepository();
+        $this->hostRepository         = $repositoryFactory->getHostRepository();
         $this->jwt = $thirdPartyFactory->getJWT();
     }
 
@@ -37,41 +40,63 @@ class SessionTokenService
     {
         // Step 1: Fetch the user/employee based on input criteria
         $driver = $input->driver;
+        $employee = $input->employee;
         $host = $input->host;
         $password = $input->password;
         $name = null;
         $typeEntity = null;
         $driverId = null;
         $hostId = null;
-        if (($driver && $host) || (!$driver && !$host)) {
+        $employeeId = null;
+        $id = null;
+
+        error_log(json_encode([
+            'driver' => $input->driver ?? null,
+            'host' => $input->host ?? null,
+            'employee' => $input->employee ?? null,
+        ], JSON_PRETTY_PRINT));
+
+        if (($driver && $host && $employee) || (!$driver && !$host && !$employee)) {
             throw new NotAcceptableException("Only user or employee must be provided, not both.");
-        }  
+        }
 
         $now = DateTimeOffset::getAdjustedDateTime();
 
-        if($driver){        
+        if ($driver) {
 
-            $this->validateBlockedEntity($driver, $password, true);
-    
+            $this->validateBlockedEntity($driver, $password, 'driver');
+
             $driverId = $driver->getId();
+            $id = $driverId;
+            $typeEntity = 'driver';
             $name = $driver->getName();
-        }else{
-            $this->validateBlockedEntity($host, $password, false);
+        } else if ($host) {
+            $this->validateBlockedEntity($host, $password, 'host');
 
             $hostId = $host->getId();
+            $id = $hostId;
+            $typeEntity = 'host';
             $name = $host->getName();
+        } else {
+            $this->validateBlockedEntity($employee, $password, 'employee');
+
+            $employeeId = $employee->getId();
+            $id = $employeeId;
+            $typeEntity = 'employee';
+
+            $name = $employee->getName();
         }
 
         // Step 3: Revoke previous tokens
-        $id = $driverId ? $driverId : $hostId;
         try {
-            $this->tokenRepository->revokeTokenByUserId(id: $id, realUser: $driverId ? true : false);
+            error_log('veio no revoke');
+            $this->tokenRepository->revokeTokenByUserId(id: $id, authType: $typeEntity);
         } catch (InternalException) {
             throw new InternalException("Error deleting user session.");
         }
 
         // Step 4: Generate the new access token
-        $authType = $driverId ? "driver" : "host";
+        $authType = $typeEntity;
 
         $tokenExpiration = (int) $_ENV['TOKEN_EXPIRATION_TIME'];
         $payloadToken = ["uid" => $id, "authType" => $authType];
@@ -86,7 +111,7 @@ class SessionTokenService
             "authType" => $authType
         ];
         $refreshToken = $this->jwt->encode($payloadRefreshToken, $refreshTokenExpiration);
-        
+
         $type = new TokenType(TokenType::REFRESH_TOKEN);
 
         try {
@@ -95,6 +120,7 @@ class SessionTokenService
                     token: $refreshToken,
                     driverId: $driverId,
                     hostId: $hostId,
+                    employeeId: $employeeId,
                     type: $type
                 )
             );
@@ -115,7 +141,7 @@ class SessionTokenService
     private function validateBlockedEntity(object $entity, string $password, string $entityType): void
     {
         $now = DateTimeOffset::getAdjustedDateTime();
-        $repository = $entityType == EntityType::DRIVER ? $this->driverRepository : $this->hostRepository;
+        $repository = $this->getRepository($entityType);
         $label = $entityType;
 
         if (!$entity->passwordVerify($password)) {
@@ -154,8 +180,13 @@ class SessionTokenService
         }
     }
 
+    private function getRepository(string $entityType)
+    {
+        return match ($entityType) {
+            'driver' => $this->driverRepository,
+            'host' => $this->hostRepository,
+            'employee' => $this->employeeRepository,
+            default => throw new \InvalidArgumentException("Invalid entity type")
+        };
+    }
 }
-
-
-
-

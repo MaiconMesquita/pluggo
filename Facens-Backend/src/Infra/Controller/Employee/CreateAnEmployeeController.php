@@ -25,7 +25,6 @@ class CreateAnEmployeeController implements Controller
             "email" => 'required',
             "cpf" => 'required',
             "phone"    => 'required',
-            "employeeType"       => 'required',
             "password"       => 'nullable',
         ];
 
@@ -44,7 +43,6 @@ class CreateAnEmployeeController implements Controller
         $input->email = $requestValidator->getParam('email');
         $input->cpf = $requestValidator->getParam('cpf');
         $input->password = $requestValidator->getParam('password');
-        $input->employeeType = $requestValidator->getParam('employeeType');
 
         return $input;
     }

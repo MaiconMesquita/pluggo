@@ -8,10 +8,12 @@ final class EntityType
 {
     const DRIVER = 'driver';
     const HOST = 'host';
+    const EMPLOYEE = 'employee';
 
     const ALL_USERS = [
         self::DRIVER,
         self::HOST,
+        self::EMPLOYEE,
     ];
 
     public function __construct(

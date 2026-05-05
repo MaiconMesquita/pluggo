@@ -10,14 +10,18 @@ use App\Domain\RepositoryContract\{
     DriverRepositoryContract,
     HostRepositoryContract,
     TokenRepositoryContract,
-    ChargeSpotsRepositoryContract
+    ChargeSpotsRepositoryContract,
+    EmployeeRepositoryContract,
+    SpotReviewRepositoryContract
 };
 use App\Infra\Repository\{
     ApiKeyRepository,
     DriverRepository,
     HostRepository,
     TokenRepository,
-    ChargeSpotsRepository
+    ChargeSpotsRepository,
+    EmployeeRepository,
+    SpotReviewRepository
 };
 
 class RepositoryFactoryMySQL implements RepositoryFactoryContract
@@ -35,6 +39,17 @@ class RepositoryFactoryMySQL implements RepositoryFactoryContract
     {
         return new ChargeSpotsRepository($this->dbInstace->getEntityManager());
     }
+
+    public function getEmployeeRepository(): EmployeeRepositoryContract
+    {
+        return new EmployeeRepository($this->dbInstace->getEntityManager());
+    }
+
+    public function getReviewSpotRepository(): SpotReviewRepositoryContract
+    {
+        return new SpotReviewRepository($this->dbInstace->getEntityManager());
+    }
+
 
     public function getHostRepository(): HostRepositoryContract
     {

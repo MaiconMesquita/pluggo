@@ -35,7 +35,13 @@ class SignupController implements Controller
         $input = new SignupInput;
 
         $phone = $requestValidator->getParam('phone');
-        if (!ctype_digit($phone)) throw new InvalidDataException('Phone must contain only numbers.');
+
+        // remove tudo que não for número
+        $phone = preg_replace('/\D/', '', $phone);
+
+        if (empty($phone)) {
+            throw new InvalidDataException('Phone is required.');
+        }
 
         $input->name = $requestValidator->getParam('name');
         $input->userType = $requestValidator->getParam('userType');

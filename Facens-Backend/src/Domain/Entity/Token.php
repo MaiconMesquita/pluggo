@@ -14,16 +14,18 @@ final class Token
     private ?string $code = null;
     private ?int $driverId = null;
     private ?int $hostId = null;
+    private ?int $employeeId = null;
 
     public static function create(
         TokenDTO $token,
         TokenType $type,
         ?int $driverId = null,
         ?int $hostId = null,
+        ?int $employeeId = null,
         ?string $code = null
     ): self {
         // Verifica se apenas um dos IDs foi fornecido
-        $ids = array_filter([$driverId, $hostId]);
+        $ids = array_filter([$driverId, $hostId, $employeeId]);
         if (count($ids) !== 1) {
             throw new NotAcceptableException("Only one ID must be provided.");
         }
@@ -34,6 +36,7 @@ final class Token
         $instance->code = $code;
         $instance->driverId = $driverId;
         $instance->hostId = $hostId;
+        $instance->employeeId = $employeeId;
 
         return $instance;
     }
@@ -44,6 +47,7 @@ final class Token
             'id' => $this->id,
             'driverId' => $this->driverId,
             'hostId' => $this->hostId,
+            'employeeId' => $this->employeeId,
             'code' => $this->code,
             'type' => $this->type,
         ];
@@ -56,9 +60,20 @@ final class Token
         return $this->driverId;
     }
 
+    public function getEmployeeId(): ?int
+    {
+        return $this->employeeId;
+    }
+
     public function setDriverId(?int $driverId)
     {
         $this->driverId = $driverId;
+        return $this;
+    }
+
+    public function setEmployeeId(?int $employeeId)
+    {
+        $this->employeeId = $employeeId;
         return $this;
     }
 

@@ -11,20 +11,8 @@ class RegistrationValidation
     private array $defaultUserFields = [
         'name',
         'cpf',
-        'rg',
         'phone',
         'email',
-        'street',
-        'postalCode',
-        'neighborhood',
-        'number',
-        'city',
-        'state',
-        'latitude',
-        'longitude',
-        'codeValidation',
-        'acceptedTermsOfUse',
-        'acceptedCardTerms',
     ];
 
     private array $defaultEmployeeFields = [
