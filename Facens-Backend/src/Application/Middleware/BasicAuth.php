@@ -4,11 +4,10 @@ namespace App\Application\Middleware;
 
 use Exception;
 use App\Domain\Entity\Auth;
-use App\Domain\Entity\ValueObject\UserType;
 use App\Domain\Exception\InvalidAuthException;
 use App\Infra\Controller\HttpRequest;
 use App\Infra\Factory\Contract\RepositoryFactoryContract;
-use App\Domain\RepositoryContract\{UserRepositoryContract, ApiKeyRepositoryContract, DriverRepositoryContract};
+use App\Domain\RepositoryContract\{ApiKeyRepositoryContract, DriverRepositoryContract};
 
 
 class BasicAuth
@@ -24,39 +23,52 @@ class BasicAuth
 
     public function execute(HttpRequest $request)
     {
-        if (empty($request->headers['Authorization']) && empty($request->headers['authorization'])) throw new Exception('Unauthorized');
+        $authorization = $request->headers['Authorization'][0] ?? $request->headers['authorization'][0] ?? null;
+        $apiKey = $request->headers['Api-Key'][0] ?? $request->headers['api-key'][0] ?? null;
 
-        if (empty($request->headers['Api-Key']) && empty($request->headers['api-key'])) {
+        if (!$authorization && !$apiKey) {
             throw new Exception('Unauthorized');
         }
 
-        if(! empty($request->headers['Api-Key'])){
-            $apiKeyId =  $request->headers['Api-Key'][0] || $request->headers['api-key'][0];
-            $apiKey = @$this->apiKeyRepository->getById($apiKeyId);
-            if(!$apiKey)
-            throw new Exception('Unauthorized');
-        }else if(!empty($request->headers['Authorization'])){
-        
-        $authorization =  $request->headers['Authorization'][0] || $request->headers['authorization'][0];
+        // Validar com Api-Key
+        if ($apiKey) {
+            $key = @$this->apiKeyRepository->getById($apiKey);
+            if (!$key) {
+                throw new Exception('Unauthorized');
+            }
+            return;
+        }
 
-        $exploded = explode(' ', $authorization);
-        if (strtolower($exploded[0]) !== 'basic') throw new Exception('The Authorization must be Basic');
+        // Validar com Basic Auth
+        if ($authorization) {
+            $exploded = explode(' ', $authorization);
+            if (strtolower($exploded[0]) !== 'basic') {
+                throw new Exception('The Authorization must be Basic');
+            }
 
-        $basicAuth = base64_decode($exploded[1]);
-        $email = explode(':', $basicAuth)[0];
-        $password = explode(':', $basicAuth)[1];
+            $basicAuth = base64_decode($exploded[1]);
+            $credentials = explode(':', $basicAuth);
+            $email = $credentials[0] ?? null;
+            $password = $credentials[1] ?? null;
 
-        $driver = $this->driverRepository->findOneBy(["email" => $email]);
-        if (!$driver->passwordVerify((string) $password)) throw new InvalidAuthException();
+            if (!$email || !$password) {
+                throw new Exception('Invalid credentials format');
+            }
 
-        $auth = new Auth(
-            driverId: $driver->getId(),
-            scopes: [], // $user->getScopes(),
-            timezone: "America/Sao_Paulo", // $user->getTimezone(),
-            authType: 'driver'
-        );
+            $driver = $this->driverRepository->findOneBy(["email" => $email]);
+            if (!$driver || !$driver->passwordVerify($password)) {
+                throw new InvalidAuthException();
+            }
 
-        $auth->login();
+            $auth = new Auth(
+                driverId: $driver->getId(),
+                scopes: [],
+                timezone: "America/Sao_Paulo",
+                authType: 'driver'
+            );
+
+            $auth->login();
         }
     }
 }
+

@@ -19,6 +19,7 @@ class CreateChargerSpotController implements Controller
     public function serialize(array $body): CreateChargerSpotInput
     {
         if (
+            empty($body['hostId']) ||
             empty($body['name']) ||
             empty($body['latitude']) ||
             empty($body['longitude'])
@@ -28,6 +29,7 @@ class CreateChargerSpotController implements Controller
 
         // ⭐ Monta input
         $input = new CreateChargerSpotInput();
+        $input->hostId = $body['hostId'];
         $input->name = $body['name'];
         $input->latitude = $body['latitude'];
         $input->longitude = $body['longitude'];
@@ -36,7 +38,7 @@ class CreateChargerSpotController implements Controller
 
         return $input;
     }
-  public function handle(HttpRequest $httpRequest): HttpResponse
+    public function handle(HttpRequest $httpRequest): HttpResponse
     {
         return new HttpResponse(
             HttpResponse::HTTP_NO_CONTENT,

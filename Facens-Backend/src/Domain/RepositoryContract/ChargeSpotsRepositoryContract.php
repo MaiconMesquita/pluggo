@@ -24,6 +24,7 @@ interface ChargeSpotsRepositoryContract
 
     public function testFetchAll(): array;
 
+    public function delete(int $id): void;
 
     /**
      * Buscar ChargeSpots de um host específico

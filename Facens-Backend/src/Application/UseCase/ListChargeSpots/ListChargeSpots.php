@@ -3,7 +3,6 @@
 namespace App\Application\UseCase\ListChargeSpots;
 
 use App\Domain\Entity\Auth;
-use App\Domain\Entity\ValueObject\EmployeeType;
 use App\Domain\Exception\InvalidDataException;
 use App\Domain\RepositoryContract\ChargeSpotsRepositoryContract;
 use App\Domain\RepositoryContract\HostRepositoryContract;
@@ -21,18 +20,58 @@ class ListChargeSpots
         $this->chargeSpotsRepository = $repositoryFactory->getChargeSpotsRepository();
     }
 
-    public function execute(ListChargeSpotsInput $input)
+    public function execute(ListChargeSpotsInput $input): array
     {
-        $hostId = $input->hostId ?? Auth::getLogged()->getHost();
+        $auth = Auth::getLogged();
+        $authType = $auth->getAuthType();
+
+        if ($authType === 'host') {
+            return $this->listForHost($auth);
+        } elseif ($authType === 'employee') {
+            return $this->listForEmployee($auth, $input);
+        } elseif ($authType === 'driver') {
+            return $this->listForDriver();
+        }
+
+        throw new InvalidDataException("Tipo de autenticação não suportado: $authType");
+    }
+
+    private function listForHost(Auth $auth): array
+    {
+        $hostId = $auth->getHost();
+
+        if (!$hostId) {
+            throw new InvalidDataException("Host não identificado no token.");
+        }
 
         $host = $this->hostRepositoryContract->getById($hostId);
 
         if (!$host) {
-            throw new InvalidDataException("HostId inválido para o usuário atual.");
+            throw new InvalidDataException("Host inválido.");
         }
 
-        $spots = $this->chargeSpotsRepository->getByHostId($host->getId());
+        return $this->chargeSpotsRepository->getByHostId($host->getId());
+    }
 
-        return $spots;
+    private function listForEmployee(Auth $auth, ListChargeSpotsInput $input): array
+    {
+        $hostId = $input->hostId;
+
+        if ($hostId === null || $hostId === '') {
+            return $this->chargeSpotsRepository->list();
+        }
+
+        $host = $this->hostRepositoryContract->getById($hostId);
+
+        if (!$host) {
+            throw new InvalidDataException("HostId inválido: $hostId");
+        }
+
+        return $this->chargeSpotsRepository->getByHostId($host->getId());
+    }
+
+    private function listForDriver(): array
+    {
+        return $this->chargeSpotsRepository->list();
     }
 }

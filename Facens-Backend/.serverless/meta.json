@@ -1,6 +1,6 @@
 {
   "C:\\Users\\HP\\Documents\\facens\\pluggo\\Facens-Backend\\serverless.yaml": {
-    "versionFramework": "4.35.0",
+    "versionFramework": "4.36.1",
     "servicePath": "C:\\Users\\HP\\Documents\\facens\\pluggo\\Facens-Backend\\serverless.yaml",
     "serviceConfigFileName": "serverless.yaml",
     "service": {
@@ -105,7 +105,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-sa-east-1-206ba244-b0bb",
-                  "S3Key": "serverless/api-plugGo/dev/1778021332583-2026-05-05T22:48:52.583Z/api-plugGo.zip"
+                  "S3Key": "serverless/api-plugGo/dev/1779298428308-2026-05-20T17:33:48.308Z/api-plugGo.zip"
                 },
                 "Handler": "src/index.php",
                 "Runtime": "provided.al2",
@@ -127,14 +127,14 @@
                 "ApiDashbackendLogGroup"
               ]
             },
-            "ApiDashbackendLambdaVersionQjKQ34XOSPK0EubDDPlVBBph58geYHUVYFofN0es4": {
+            "ApiDashbackendLambdaVersionRRgfi6EodBL7iSz3UFGdsrwYdtzXqtOZwUBB0QUX2E": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "ApiDashbackendLambdaFunction"
                 },
-                "CodeSha256": "kZto7RDnVV9+GOn3zfEX5KsGGdh7GkYKsadhntOR1W4="
+                "CodeSha256": "gvaBkiWJ2teomMK6fvb+PVlQqUDu3YQrt21fEf8Gb1Q="
               }
             },
             "HttpApi": {
@@ -243,7 +243,7 @@
             "ApiDashbackendLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "ApiDashbackendLambdaVersionQjKQ34XOSPK0EubDDPlVBBph58geYHUVYFofN0es4"
+                "Ref": "ApiDashbackendLambdaVersionRRgfi6EodBL7iSz3UFGdsrwYdtzXqtOZwUBB0QUX2E"
               },
               "Export": {
                 "Name": "sls-api-plugGo-dev-ApiDashbackendLambdaFunctionQualifiedArn"
@@ -313,7 +313,7 @@
           "memory": 128,
           "runtime": "provided.al2",
           "vpc": {},
-          "versionLogicalId": "ApiDashbackendLambdaVersionQjKQ34XOSPK0EubDDPlVBBph58geYHUVYFofN0es4"
+          "versionLogicalId": "ApiDashbackendLambdaVersionRRgfi6EodBL7iSz3UFGdsrwYdtzXqtOZwUBB0QUX2E"
         }
       },
       "package": {
@@ -338,7 +338,7 @@
         ],
         "deploymentBucket": "serverless-framework-deployments-sa-east-1-206ba244-b0bb",
         "artifact": "C:\\Users\\HP\\Documents\\facens\\pluggo\\Facens-Backend\\.serverless\\api-plugGo.zip",
-        "artifactDirectoryName": "serverless/api-plugGo/dev/1778021332583-2026-05-05T22:48:52.583Z"
+        "artifactDirectoryName": "serverless/api-plugGo/dev/1779298428308-2026-05-20T17:33:48.308Z"
       }
     },
     "provider": {
@@ -441,7 +441,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-sa-east-1-206ba244-b0bb",
-                "S3Key": "serverless/api-plugGo/dev/1778021332583-2026-05-05T22:48:52.583Z/api-plugGo.zip"
+                "S3Key": "serverless/api-plugGo/dev/1779298428308-2026-05-20T17:33:48.308Z/api-plugGo.zip"
               },
               "Handler": "src/index.php",
               "Runtime": "provided.al2",
@@ -463,14 +463,14 @@
               "ApiDashbackendLogGroup"
             ]
           },
-          "ApiDashbackendLambdaVersionQjKQ34XOSPK0EubDDPlVBBph58geYHUVYFofN0es4": {
+          "ApiDashbackendLambdaVersionRRgfi6EodBL7iSz3UFGdsrwYdtzXqtOZwUBB0QUX2E": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiDashbackendLambdaFunction"
               },
-              "CodeSha256": "kZto7RDnVV9+GOn3zfEX5KsGGdh7GkYKsadhntOR1W4="
+              "CodeSha256": "gvaBkiWJ2teomMK6fvb+PVlQqUDu3YQrt21fEf8Gb1Q="
             }
           },
           "HttpApi": {
@@ -579,7 +579,7 @@
           "ApiDashbackendLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiDashbackendLambdaVersionQjKQ34XOSPK0EubDDPlVBBph58geYHUVYFofN0es4"
+              "Ref": "ApiDashbackendLambdaVersionRRgfi6EodBL7iSz3UFGdsrwYdtzXqtOZwUBB0QUX2E"
             },
             "Export": {
               "Name": "sls-api-plugGo-dev-ApiDashbackendLambdaFunctionQualifiedArn"
@@ -644,12 +644,12 @@
     "serviceProviderAwsCfStackName": "api-plugGo-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:sa-east-1:809918851991:stack/api-plugGo-dev/de2e2cc0-3eca-11f1-b82c-06e048801ed5",
     "serviceProviderAwsCfStackCreated": "2026-04-23T04:14:06.168Z",
-    "serviceProviderAwsCfStackUpdated": "2026-05-05T22:39:30.535Z",
+    "serviceProviderAwsCfStackUpdated": "2026-05-20T17:31:29.680Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "ApiDashbackendLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:sa-east-1:809918851991:function:api-plugGo-dev-api-backend:31",
+        "OutputValue": "arn:aws:lambda:sa-east-1:809918851991:function:api-plugGo-dev-api-backend:52",
         "Description": "Current Lambda function version",
         "ExportName": "sls-api-plugGo-dev-ApiDashbackendLambdaFunctionQualifiedArn"
       },
@@ -764,7 +764,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-sa-east-1-206ba244-b0bb",
-              "S3Key": "serverless/api-plugGo/dev/1778021332583-2026-05-05T22:48:52.583Z/api-plugGo.zip"
+              "S3Key": "serverless/api-plugGo/dev/1779298428308-2026-05-20T17:33:48.308Z/api-plugGo.zip"
             },
             "Handler": "src/index.php",
             "Runtime": "provided.al2",
@@ -786,14 +786,14 @@
             "ApiDashbackendLogGroup"
           ]
         },
-        "ApiDashbackendLambdaVersionQjKQ34XOSPK0EubDDPlVBBph58geYHUVYFofN0es4": {
+        "ApiDashbackendLambdaVersionRRgfi6EodBL7iSz3UFGdsrwYdtzXqtOZwUBB0QUX2E": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "ApiDashbackendLambdaFunction"
             },
-            "CodeSha256": "kZto7RDnVV9+GOn3zfEX5KsGGdh7GkYKsadhntOR1W4="
+            "CodeSha256": "gvaBkiWJ2teomMK6fvb+PVlQqUDu3YQrt21fEf8Gb1Q="
           }
         },
         "HttpApi": {
@@ -902,7 +902,7 @@
         "ApiDashbackendLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "ApiDashbackendLambdaVersionQjKQ34XOSPK0EubDDPlVBBph58geYHUVYFofN0es4"
+            "Ref": "ApiDashbackendLambdaVersionRRgfi6EodBL7iSz3UFGdsrwYdtzXqtOZwUBB0QUX2E"
           },
           "Export": {
             "Name": "sls-api-plugGo-dev-ApiDashbackendLambdaFunctionQualifiedArn"

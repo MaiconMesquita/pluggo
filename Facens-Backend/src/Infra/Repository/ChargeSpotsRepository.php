@@ -157,4 +157,9 @@ class ChargeSpotsRepository extends BaseRepository implements ChargeSpotsReposit
             $entity->reviews->initialize();
         }
     }
+
+    public function delete(int $id): void
+{
+    parent::delete($id);
+}
 }

@@ -16,5 +16,7 @@ interface HostRepositoryContract
 
     public function findOneBy(array $params): ?Host;
 
-    public function searchHost(?int $limit = null, ?int $offset = null, ?array $params = []): PaginatedEntities;
+    public function delete(int $id): void;
+
+    public function searchHost(?int $limit = null, ?int $offset = null, ?array $filters = []): PaginatedEntities;
 }

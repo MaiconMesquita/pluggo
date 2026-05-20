@@ -22,7 +22,7 @@ use App\Infra\Factory\Contract\{
 
 class GeneralSignin
 {
-    private array $repositories; // lista de repositórios genéricos
+    private array $repositories;
     private GeneralSessionTokenService $sessionTokenService;
     private RegistrationValidation $validationService;
 
@@ -31,8 +31,10 @@ class GeneralSignin
         ThirdPartyFactoryContract $thirdPartyFactory
     ) {
         $this->repositories = [
-            'driver'          => $repositoryFactory->getDriverRepository(),
+            'driver'    => $repositoryFactory->getDriverRepository(),
             'host'      => $repositoryFactory->getHostRepository(),
+            'employee'  => $repositoryFactory->getEmployeeRepository(),
+            'support'   => $repositoryFactory->getEmployeeRepository(), // alias para employee
         ];
 
         $this->sessionTokenService = new GeneralSessionTokenService(
@@ -55,16 +57,19 @@ class GeneralSignin
             throw new InvalidDataException("Password is required.");
         }
 
+        // Normalizar "support" para "employee"
+        if ($entityType === 'support') {
+            $entityType = 'employee';
+        }
+
         // 1. Buscar a entidade
         if ($entityType && isset($this->repositories[$entityType])) {
             $repo = $this->repositories[$entityType];
 
-            
-                if (!$email) {
-                    throw new InvalidDataException("Email is required for {$entityType}.");
-                }
-                $entity = $repo->findOneBy(['email' => $email]);
-            
+            if (!$email) {
+                throw new InvalidDataException("Email is required for {$entityType}.");
+            }
+            $entity = $repo->findOneBy(['email' => $email]);
 
             if (!$entity) {
                 throw new NotAcceptableException("No {$entityType} found with given credentials.");
@@ -72,6 +77,10 @@ class GeneralSignin
         } else {
             // fallback: tenta em todos os repositórios
             foreach ($this->repositories as $type => $repo) {
+                if ($type === 'support') {
+                    continue; // pula alias
+                }
+
                 if ($email) {
                     $entity = $repo->findOneBy(['email' => $email]);
                 }
@@ -97,3 +106,4 @@ class GeneralSignin
         return $this->sessionTokenService->generateToken($sessionToken);
     }
 }
+

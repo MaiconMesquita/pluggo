@@ -7,12 +7,14 @@ use App\Infra\ThirdParty\JWT\JWT;
 use App\Infra\Controller\HttpRequest;
 use App\Domain\RepositoryContract\DriverRepositoryContract;
 use App\Domain\RepositoryContract\HostRepositoryContract;
+use App\Domain\RepositoryContract\EmployeeRepositoryContract;
 use App\Infra\Factory\Contract\{ThirdPartyFactoryContract, RepositoryFactoryContract};
 
 class BearerAuth
 {
     private DriverRepositoryContract $driverRepository;
     private HostRepositoryContract $hostRepository;
+    private EmployeeRepositoryContract $employeeRepository;
     private JWT $jwt;
 
     /**
@@ -23,8 +25,9 @@ class BearerAuth
         ThirdPartyFactoryContract $thirdPartyFactory,
         private array $allowedTypes = ['driver', 'host'],
     ) {
-        $this->driverRepository          = $repositoryFactory->getDriverRepository();
-        $this->hostRepository      = $repositoryFactory->getHostRepository();
+        $this->driverRepository = $repositoryFactory->getDriverRepository();
+        $this->hostRepository = $repositoryFactory->getHostRepository();
+        $this->employeeRepository = $repositoryFactory->getEmployeeRepository();
         $this->jwt = $thirdPartyFactory->getJWT();
     }
 
@@ -47,12 +50,14 @@ class BearerAuth
         $tokenDecoded = $this->jwt->decode($token);
 
         $entityId = $tokenDecoded->data['uid'];
-        $authType = $tokenDecoded->data['authType']; // 'user' | 'employee' | 'establishment' | 'supplier'
+        $authType = $tokenDecoded->data['authType']; // 'driver' | 'host' | 'employee' | others
 
         // 🔒 Restrição por rota com allowedTypes
         if (!in_array($authType, $this->allowedTypes, true)) {
             throw new Exception("Unauthorized: This route allows only [" . implode(', ', $this->allowedTypes) . "]");
         }
+
+        $auth = null;
 
         switch ($authType) {
             case 'driver':
@@ -72,7 +77,7 @@ class BearerAuth
             case 'host':
                 $host = $this->hostRepository->getById($entityId);
                 if (!$host) {
-                    throw new Exception('Unauthorized: Invalid User');
+                    throw new Exception('Unauthorized: Invalid host');
                 }
 
                 $auth = new Auth(
@@ -82,10 +87,29 @@ class BearerAuth
                     authType: 'host'
                 );
                 break;
+
+            case 'employee':
+            case 'support':
+                $employee = $this->employeeRepository->getById($entityId);
+                if (!$employee) {
+                    throw new Exception('Unauthorized: Invalid employee');
+                }
+
+                $auth = new Auth(
+                    employeeId: $employee->getId(),
+                    scopes: [],
+                    timezone: "America/Sao_Paulo",
+                    authType: 'employee'
+                );
+                break;
+
             default:
                 throw new Exception('Unauthorized: Unknown Auth Type');
         }
 
-        $auth->login();
+        if ($auth) {
+            $auth->login();
+        }
     }
 }
+

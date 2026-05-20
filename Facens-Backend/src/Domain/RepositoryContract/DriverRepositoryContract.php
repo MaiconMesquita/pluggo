@@ -17,5 +17,8 @@ interface DriverRepositoryContract
 
     public function findOneBy(array $params): ?Driver;
 
-    public function searchDrivers(?int $limit = null, ?int $offset = null, ?array $params = []): PaginatedEntities;
+    public function delete(int $id): void;
+
+    public function searchDrivers(?int $limit = null, ?int $offset = null, ?array $filters = []): PaginatedEntities;
+
 }

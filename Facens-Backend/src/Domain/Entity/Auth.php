@@ -16,11 +16,13 @@ final class Auth
         private ?string $supplierType = null,
         private ?string $driverId = null,
         private ?string $hostId = null,
+        private ?string $employeeId = null,
     ) {}
 
     // -------- GETTERS --------
     public function getDriver(): ?string         { return $this->driverId; }
     public function getHost(): ?string     { return $this->hostId; }
+    public function getEmployee(): ?string       { return $this->employeeId; }
 
     public function getUserType(): ?string         { return $this->userType; }
     public function getEmployeeType(): ?string     { return $this->employeeType; }

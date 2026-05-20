@@ -21,7 +21,7 @@ class DriverRepository extends BaseRepository implements DriverRepositoryContrac
     }
 
     public function create(Driver $driver): Driver
-    {   
+    {
         $DriverOrm = DriverORM::fromDomain($driver);
 
         return $this->persist($DriverOrm)->toDomain();
@@ -33,34 +33,34 @@ class DriverRepository extends BaseRepository implements DriverRepositoryContrac
     }
 
     public function getAllPaginated(?int $limit = null, ?int $offset = null, ?array $params = []): PaginatedEntities
-    {     
+    {
         $criteria = $params;
         // Filtrar por múltiplos ids, se fornecido
         if (!empty($params['ids']) && is_array($params['ids'])) {
             $criteria['id'] = $params['ids'];
             unset($criteria['ids']); // Remove o parâmetro customizado
         }
-        
-        if($limit > 0 && $offset >= 0)
-        return new PaginatedEntities(
-            totalItems: $this->repository->count($criteria),
-            items: $this->getAll(params: $criteria, limit: $limit, offset: $offset)
-        );
+
+        if ($limit > 0 && $offset >= 0)
+            return new PaginatedEntities(
+                totalItems: $this->repository->count($criteria),
+                items: $this->getAll(params: $criteria, limit: $limit, offset: $offset)
+            );
         else
-        return new PaginatedEntities(
-            totalItems: $this->repository->count($criteria),
-            items: $this->getByParams(params: $criteria)
-        );
+            return new PaginatedEntities(
+                totalItems: $this->repository->count($criteria),
+                items: $this->getByParams(params: $criteria)
+            );
     }
 
     public function update(Driver $driver): Driver
-    {   
-        
+    {
+
         $DriverOrm = parent::getEntityById($driver->getId());
- 
+
         if (!empty($driver->getName())) $DriverOrm->name = $driver->getName();
-        if (!empty($driver->getPhone())) $DriverOrm->phone = (string) $driver->getPhone();        
-        if (!empty($driver->getEmail())) $DriverOrm->email = $driver->getEmail();   
+        if (!empty($driver->getPhone())) $DriverOrm->phone = (string) $driver->getPhone();
+        if (!empty($driver->getEmail())) $DriverOrm->email = $driver->getEmail();
         if (!empty($driver->getPassword())) $DriverOrm->password = $driver->getPassword();
 
         return $this->persist($DriverOrm)->toDomain();
@@ -80,49 +80,82 @@ class DriverRepository extends BaseRepository implements DriverRepositoryContrac
         return $employeeOrm->toDomain();
     }
 
-    public function searchDrivers(?int $limit = null, ?int $offset = null, ?array $params = []): PaginatedEntities
+    public function searchDrivers(?int $limit = null, ?int $offset = null, ?array $filters = []): PaginatedEntities
     {
-        $criteria = Criteria::create();
+        $qb = $this->entityManager->createQueryBuilder();
+        $qb->select('b')
+            ->from(DriverORM::class, 'b')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->orderBy('b.createdAt', 'DESC');
 
-        // Filtro para apenas registros ativos
+        $countQb = $this->entityManager->createQueryBuilder();
+        $countQb->select('COUNT(b.id)')
+            ->from(DriverORM::class, 'b');
 
-        // Filtrar por múltiplos ids, se fornecido
-        if (!empty($params['ids']) && is_array($params['ids'])) {
-            $criteria->andWhere(Criteria::expr()->in('id', $params['ids']));
+        /**
+         * 🔹 CAMPOS PERMITIDOS (evita bug + segurança)
+         */
+        $allowedFields = [
+            'email',
+            'name',
+            'phone',
+            'id', // só se existir no ORM
+        ];
+
+        foreach (($filters ?? []) as $field => $value) {
+
+            if ($value === null || $value === '') {
+                continue;
+            }
+
+            if (!in_array($field, $allowedFields)) {
+                continue;
+            }
+
+            $param = "{$field}Param";
+
+            // filtro parcial para name/email
+            if (in_array($field, ['name', 'email'])) {
+
+                $qb->andWhere("b.$field LIKE :$param");
+                $countQb->andWhere("b.$field LIKE :$param");
+
+                $qb->setParameter($param, "%$value%");
+                $countQb->setParameter($param, "%$value%");
+
+                continue;
+            }
+
+            // filtro exato pros outros
+            $qb->andWhere("b.$field = :$param");
+            $countQb->andWhere("b.$field = :$param");
+
+            $qb->setParameter($param, $value);
+            $countQb->setParameter($param, $value);
         }
 
-        // Aplicar filtro LIKE se 'field' e 'filter' forem fornecidos
-        if (!empty($params['field']) && !empty($params['filter'])) {
-            $criteria->andWhere(
-                Criteria::expr()->contains($params['field'], $params['filter'])
-            );
-        }
+        /**
+         * 🔹 TOTAL
+         */
+        $totalItems = (int) $countQb->getQuery()->getSingleScalarResult();
 
-        // Filtrar por employeeType se fornecido
-        if (!empty($params['employeeType'])) {
-            $criteria->andWhere(Criteria::expr()->eq('employeeType', $params['employeeType']));
-        }
-
-        // Filtrar por superiorId se fornecido
-        if (!empty($params['superiorId'])) {
-            $criteria->andWhere(Criteria::expr()->eq('superiorId', $params['superiorId']));
-        }
-
-        // Contar total de itens
-        $totalItems = $this->repository->matching($criteria)->count();
-
-        // Aplicar limite e offset
-        if ($limit !== null) {
-            $criteria->setMaxResults($limit);
-        }
-        if ($offset !== null) {
-            $criteria->setFirstResult($offset);
-        }
+        /**
+         * 🔹 RESULTADOS
+         */
+        $items = array_map(
+            fn(DriverORM $orm) => $orm->toDomain(),
+            $qb->getQuery()->getResult()
+        );
 
         return new PaginatedEntities(
             totalItems: $totalItems,
-            items: $this->repository->matching($criteria)->map(fn ($entity) => $entity->toDomain())->toArray()
+            items: $items
         );
     }
 
+    public function delete(int $id): void
+    {
+        parent::delete($id);
+    }
 }

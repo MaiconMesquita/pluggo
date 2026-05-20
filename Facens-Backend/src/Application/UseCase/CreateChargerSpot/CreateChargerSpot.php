@@ -27,28 +27,9 @@ class CreateChargerSpot
 
     public function execute(CreateChargerSpotInput $input): ChargeSpots
     {
-        // Obtém usuário logado
-        $auth = Auth::getLogged();
+        
+    $host = $this->hostRepository->getById($input->hostId);
 
-        // 1. GARANTE QUE O USUÁRIO É DO TIPO HOST
-        if ($auth->getAuthType() !== EntityType::HOST) {
-            throw new NotAcceptableException("Apenas usuários do tipo Host podem criar pontos de carregamento.");
-        }
-
-        // 2. GARANTE QUE O HOST TEM HOST-ID VÁLIDO
-        $hostId = $auth->getHost();
-        if (!$hostId) {
-            throw new InvalidDataException("HostId inválido para o usuário atual.");
-        }
-
-        // Cria uma instância de Host (somente com ID)
-        $host = $this->hostRepository->getById($hostId);
-
-        if (!$host) {
-            throw new InvalidDataException("Host esta null.");
-        }
-
-        error_log("HOST: " . var_export($host, true));
         // 3. CRIA A ENTIDADE DE DOMÍNIO
         $spot = ChargeSpots::create(
             host: $host,

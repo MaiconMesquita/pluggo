@@ -22,10 +22,17 @@ class ListUserController implements Controller
         if (isset($params['offset'])) {
             if (!is_numeric($params['offset']) || intval($params['offset']) != $params['offset']) {
                 throw new InvalidDataException('The offset must be an integer.');
-            }   
+            }
             $input->offset = (int) $params['offset'];
         }
+
+        if (!isset($params['type'])) {
+            throw new InvalidDataException('The type is required.');
+        }
         
+        $input->type = $params['type'];
+
+
         $fields = [
             'name' => $params['name'] ?? null,
             'rg' => $params['rg'] ?? null,
@@ -35,41 +42,21 @@ class ListUserController implements Controller
             'deviceId' => $params['deviceId'] ?? null,
         ];
 
-        $filledFields = array_filter($fields);
-        
-        if (count($filledFields) > 1) {
-            throw new InvalidDataException('To perform the search you can only enter one field.');
+
+
+        $filledFields = array_filter($fields, function ($v) {
+            if (is_array($v)) {
+                return !empty(array_filter($v));
+            }
+            return $v !== null;
+        });
+
+
+
+        if (!empty($filledFields)) {
+            $input->filters = $filledFields;
         }
 
-        if (isset($fields['phone'])) {
-            $input->filter = $fields['phone'];
-            $input->field = 'phone';
-        } 
-
-        elseif (isset($fields['rg'])) {
-            $input->filter = $fields['rg'];
-            $input->field = 'rg';
-        }
-
-        elseif (isset($fields['name'])) {
-            $input->filter = $fields['name'];
-            $input->field = 'name';
-        }
-        
-        elseif (isset($fields['cpf'])) {
-            $input->filter = $fields['cpf'];
-            $input->field = 'cpf';
-        }
-
-        elseif (isset($fields['email'])) {
-            $input->filter = $fields['email'];
-            $input->field = 'email';
-        }
-
-        elseif (isset($fields['deviceId'])) {
-            $input->filter = $fields['deviceId'];
-            $input->field = 'deviceId';
-        }
         return $input;
     }
 
